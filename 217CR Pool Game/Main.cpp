@@ -1,19 +1,26 @@
 #include <GL/glew.h>
-#include <GL/freeglut.h>
+#include <GL/freeglut.h> // Used for CallBacks - A Function that is executed after another function has finished executing.
 #include <glm/glm.hpp>
 
 #pragma comment(lib, "glew32.lib") 
 
+#include "Cube.h"
+#include "Sphere.h"
+#include "Cone.h"
+
+Cube cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0)); //Position / Color
+Cube cube1(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0)); //Position / Color Yellow
+Sphere sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0)); // Position / Color Green
+Cone cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
+
 void displayScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
-
 	// Position the objects for viewing.
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-	/* Color codes https://pemavirtualhub.wordpress.com/2016/06/20/opengl-color-codes/ */
+
 	// Quad Plane, 4 Points 
 	glPushMatrix(); // <https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushMatrix.xml> Push / Pop current matric stack
 	glColor3f(1.0f, 0.0f, 1.0f); // Yellow
@@ -25,33 +32,16 @@ void displayScene()
 	glEnd();
 	glPopMatrix(); // Pops the current matrix stack, replacing the current matrix with one below it on the stack..
 
-	// black solid Cone
-	glPushMatrix(); // Defines that new element is being used
-	glColor3f(0.0, 0.0, 0.0); // black
-	glTranslatef(-1, 0, 0); // Coordinate in world space
-	glRotatef(-65, 1, 0, 0); // Angle,  (Specified Coordinates to start rotation around ) -> " x, y, z "
-	glutSolidCone(0.5, 0.75, 30, 30); // Cone size
-	glPopMatrix(); // Sets the Element 
-
-	// Blue solid cone
-	glPushMatrix();
-	glColor3f(-2, 0, 2);
-	glTranslatef(1, 0, 0);
-	glRotatef(-65, 1, 0, 0);
-	glutSolidCone(0.5, 0.75, 30, 30);
-	glPopMatrix();
-
-	// Cube
-	glPushMatrix();
-	glTranslatef(-3, 0, 0);
-	glColor3f(1, 1, 1);
-	glutSolidCube(0.8);
-	glPopMatrix();
+	
+	
+	cube.Draw();
+	cube1.Draw();
+	sphere.Draw();
+	cone.Draw();
 
 	glutSwapBuffers();
 }
 
-// Initialization routine.
 void setup(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -67,7 +57,7 @@ void resize(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-// Get Input from ACII Keys 
+// Get Input ACII Keys 
 void keyInput(unsigned char key, int x, int y)
 {
 	switch (key)
@@ -94,7 +84,6 @@ int main(int argc, char** argv)
 	glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE); // Makes Sure to Include Outdated profile functions and methods, other version to use is glut_core_profile.
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); // BitWise Xor  " Sets the bit if it is set in one operand but not both "
 	/* <https://www.opengl.org/resources/libraries/glut/spec3/node12.html>
-	Bit mask to select a double buffered window. This overrides GLUT_SINGLE if it is also specified.
 	Bit mask to select a double buffered window. This overrides GLUT_SINGLE if it is also specified.
 	Bit mask to select a window with a depth buffer.*/
 
