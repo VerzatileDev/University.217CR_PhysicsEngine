@@ -7,11 +7,15 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
+#include <vector> // FOr game Object list
+#include <iostream>
 
-Cube cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0)); //Position / Color
-Cube cube1(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0)); //Position / Color Yellow
-Sphere sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0)); // Position / Color Green
-Cone cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
+/* Game Objects */
+std::vector<GameObject*> objects; // List of Objects
+GameObject* cube = new Cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
+GameObject* cube1 = new Cube(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
+GameObject* sphere = new Sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
+GameObject* cone = new Cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
 
 void displayScene()
 {
@@ -32,12 +36,12 @@ void displayScene()
 	glEnd();
 	glPopMatrix(); // Pops the current matrix stack, replacing the current matrix with one below it on the stack..
 
-	
-	
-	cube.Draw();
-	cube1.Draw();
-	sphere.Draw();
-	cone.Draw();
+
+	// DRAW GAMEOBJECTS from list After Push Back
+	for (int i = 0; i < objects.size(); ++i)
+	{
+		objects[i]->Draw();
+	}
 
 	glutSwapBuffers();
 }
@@ -45,6 +49,13 @@ void displayScene()
 void setup(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	/* PUSH Back Objects */
+
+	objects.push_back(cube);
+	objects.push_back(cube1);
+	objects.push_back(sphere);
+	objects.push_back(cone);
 }
 
 // Set Layout of the Window Displayed.
@@ -65,10 +76,47 @@ void keyInput(unsigned char key, int x, int y)
 	case 27:
 		exit(0);
 		break;
+	case 'w':
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case 's':
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case 'a':
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case 'd':
+		std::cout << "Using key: " << key << std::endl;
+		break;
 	default:
 		break;
 	}
 }
+
+
+// Input Non- ACII keys
+void keySpecialInput(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP:
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case GLUT_KEY_DOWN:
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case GLUT_KEY_LEFT:
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	case GLUT_KEY_RIGHT:
+		std::cout << "Using key: " << key << std::endl;
+		break;
+	default:
+		break;
+
+	}
+}
+
 
 void idle()
 {
@@ -93,6 +141,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(displayScene); // Register Display CallBack Handler for Window Contents.
 	glutReshapeFunc(resize); // Called WhenEver The Window Is Reshaped (< https://www.opengl.org/resources/libraries/glut/spec3/node48.html >)
 	glutKeyboardFunc(keyInput); // Recive Key Input from The User for ACII keys - Maps.
+	glutSpecialFunc(keySpecialInput); // Non- ACII keys.
 	glutIdleFunc(idle); // Performs Background Processing Taks or Animation, when Window is not Reciving any Events. ( Set Automatically, when Events are not Recived ) (< https://www.opengl.org/resources/libraries/glut/spec3/node63.html >)
 
 	glewExperimental = GL_TRUE;

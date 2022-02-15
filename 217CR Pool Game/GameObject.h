@@ -10,7 +10,7 @@ public:
 	GameObject();
 	GameObject(glm::vec3 pos, glm::vec3 col);
 	~GameObject();
-	void Draw();
+	virtual void Draw() = 0; // Must Return Void As function is inside other class objects.
 
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	glm::vec3 position;
