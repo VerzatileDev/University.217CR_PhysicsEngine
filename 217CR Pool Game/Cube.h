@@ -8,4 +8,5 @@ public:
 	Cube(glm::vec3 pos, glm::vec3 col); // Specified Constructor Initialz of the cube.
 	~Cube();
 	void Draw();
+	void Update(float);
 };

@@ -7,8 +7,12 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
-#include <vector> // FOr game Object list
+#include <vector>//FOr game Object list
 #include <iostream>
+
+/* Game Clock ( DeltaTime ) */
+int oldTimeSinceStart;
+int newTimeSinceStart;
 
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
@@ -50,7 +54,7 @@ void setup(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	/* PUSH Back Objects */
+	/* PUSH Back Objects  ( Initialize )*/
 
 	objects.push_back(cube);
 	objects.push_back(cube1);
@@ -71,6 +75,8 @@ void resize(int w, int h)
 // Get Input ACII Keys 
 void keyInput(unsigned char key, int x, int y)
 {
+	GameObject::ACII_keyMap[key] = true;
+	std::cout << "Key pressed: " << key << " : " << GameObject::ACII_keyMap[key] << std::endl; // Debug
 	switch (key)
 	{
 	case 27:
@@ -93,10 +99,17 @@ void keyInput(unsigned char key, int x, int y)
 	}
 }
 
+void keyInputRelease(unsigned char key, int x, int y) // Resets Key Values TO False
+{
+	GameObject::ACII_keyMap[key] = false;
+	std::cout << "Key pressed: " << key << " : " << GameObject::ACII_keyMap[key] << std::endl; // Debug
+}
 
 // Input Non- ACII keys
 void keySpecialInput(int key, int x, int y)
 {
+	GameObject::NonACII_keyMap[key] = true; //Map Key use
+	std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl; // Debug
 	switch (key)
 	{
 	case GLUT_KEY_UP:
@@ -117,10 +130,44 @@ void keySpecialInput(int key, int x, int y)
 	}
 }
 
+void keySpecialInputRelease(int key, int x, int y)
+{
+	GameObject::NonACII_keyMap[key] = false;
+	std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl;
+}
+
 
 void idle()
 {
+	oldTimeSinceStart = newTimeSinceStart;
+	newTimeSinceStart = glutGet(GLUT_ELAPSED_TIME);
+
+	//std::cout << " --------------------------- " << std::endl;
+	//std::cout << "OldTimeSinceStart: " << oldTimeSinceStart << std::endl;
+	//std::cout << "NewTimeSinceStart: " << newTimeSinceStart << std::endl;
+
+	float deltaTime = (newTimeSinceStart - oldTimeSinceStart);
+	//std::cout << "Delta Time (ms): " << deltaTime << std::endl;
+	deltaTime /= 1000.f;
+	//std::cout << "Delta Time (seconds): " << deltaTime << std::endl;
+	//std::cout << " --------------------------- " << std::endl;
+
+
+	for (int i = 0; i < objects.size(); ++i)
+	{
+		objects[i]->Update(deltaTime); // Hard code deltaTime
+	}
 	glutPostRedisplay(); // Marks Window to be ReDisplayed <information at<https://www.opengl.org/resources/libraries/glut/spec3/node20.html>>
+}
+
+void onExitProgram()
+{
+	// CleanUp Code at the End of the Program when Exit is called.. 
+	std::cout << "Reclaiming Memory.. " << std::endl;
+	for (int i = 0; i < objects.size(); ++i)
+	{
+		delete objects[i];
+	}
 }
 
 /* GLUT runs a Console Application Beginning from Main()*/
@@ -141,7 +188,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(displayScene); // Register Display CallBack Handler for Window Contents.
 	glutReshapeFunc(resize); // Called WhenEver The Window Is Reshaped (< https://www.opengl.org/resources/libraries/glut/spec3/node48.html >)
 	glutKeyboardFunc(keyInput); // Recive Key Input from The User for ACII keys - Maps.
+	glutKeyboardUpFunc(keyInputRelease);
 	glutSpecialFunc(keySpecialInput); // Non- ACII keys.
+	glutSpecialUpFunc(keySpecialInputRelease);
 	glutIdleFunc(idle); // Performs Background Processing Taks or Animation, when Window is not Reciving any Events. ( Set Automatically, when Events are not Recived ) (< https://www.opengl.org/resources/libraries/glut/spec3/node63.html >)
 
 	glewExperimental = GL_TRUE;
@@ -149,5 +198,7 @@ int main(int argc, char** argv)
 
 	setup();
 
+	atexit(onExitProgram); // Called on Exit ( Initialized to before exit is called / made ready to be called "")
 	glutMainLoop(); // Recalls everything inside to Main to be Reloaded (Until a Stop in the program is called " Either Crash, Manual Exit With ACII key ESC (27)
+	
 }
