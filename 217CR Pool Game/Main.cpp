@@ -7,6 +7,7 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
+#include "Particle.h"
 #include <vector>//FOr game Object list
 #include <iostream>
 
@@ -19,7 +20,8 @@ std::vector<GameObject*> objects; // List of Objects
 GameObject* cube = new Cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
 GameObject* cube1 = new Cube(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
 GameObject* sphere = new Sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
-GameObject* cone = new Cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
+GameObject* cone = new Cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0)); // position, color
+GameObject* particle = new Particle(1.0f, glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0)); // Mass, position, color
 
 void displayScene()
 {
@@ -56,10 +58,11 @@ void setup(void)
 
 	/* PUSH Back Objects  ( Initialize )*/
 
-	objects.push_back(cube);
-	objects.push_back(cube1);
-	objects.push_back(sphere);
-	objects.push_back(cone);
+	//objects.push_back(cube);
+	//objects.push_back(cube1);
+	//objects.push_back(sphere);
+	//objects.push_back(cone);
+	objects.push_back(particle);
 }
 
 // Set Layout of the Window Displayed.
