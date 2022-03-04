@@ -11,6 +11,8 @@ private:
 	// Position From GameObject
 	glm::vec3 totalForce;
 	glm::vec3 gravity;
+	glm::vec3 futurePosition;
+	glm::vec3 wind;
 
 public:
 	void Draw();

@@ -1,15 +1,14 @@
-#include <GL/glew.h>
-#include <GL/freeglut.h> // Used for CallBacks - A Function that is executed after another function has finished executing.
-#include <glm/glm.hpp>
-
 #pragma comment(lib, "glew32.lib") 
+
+#include <vector> //for game Object list
+#include <iostream>
 
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
 #include "Particle.h"
-#include <vector>//FOr game Object list
-#include <iostream>
+#include "Quad2D.h"
+
 
 /* Game Clock ( DeltaTime ) */
 int oldTimeSinceStart;
@@ -17,6 +16,8 @@ int newTimeSinceStart;
 
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
+
+GameObject* quad = new Quad2D(glm::vec3(0, 0, 0), glm::vec3(1.0f, 2.0f, 1.0f)); // white
 GameObject* cube = new Cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
 GameObject* cube1 = new Cube(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
 GameObject* sphere = new Sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
@@ -29,19 +30,6 @@ void displayScene()
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
 	// Position the objects for viewing.
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-
-
-	// Quad Plane, 4 Points 
-	glPushMatrix(); // <https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushMatrix.xml> Push / Pop current matric stack
-	glColor3f(1.0f, 0.0f, 1.0f); // Yellow
-	glBegin(GL_QUADS); // Draw a plane element from the represented 4 point.
-	glVertex3f(5, 5, 0);// top right
-	glVertex3f(-5, 5, 0);// top left
-	glVertex3f(-5, -2, -0);// bottom right
-	glVertex3f(5, -2, -0);// bottom left
-	glEnd();
-	glPopMatrix(); // Pops the current matrix stack, replacing the current matrix with one below it on the stack..
-
 
 	// DRAW GAMEOBJECTS from list After Push Back
 	for (int i = 0; i < objects.size(); ++i)
@@ -58,6 +46,7 @@ void setup(void)
 
 	/* PUSH Back Objects  ( Initialize )*/
 
+	objects.push_back(quad);
 	//objects.push_back(cube);
 	//objects.push_back(cube1);
 	//objects.push_back(sphere);
@@ -102,7 +91,7 @@ void keyInput(unsigned char key, int x, int y)
 	}
 }
 
-void keyInputRelease(unsigned char key, int x, int y) // Resets Key Values TO False
+void keyInputRelease(unsigned char key, int x, int y)
 {
 	GameObject::ACII_keyMap[key] = false;
 	std::cout << "Key pressed: " << key << " : " << GameObject::ACII_keyMap[key] << std::endl; // Debug
