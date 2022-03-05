@@ -3,7 +3,7 @@
 Cube::Cube()
 {}
 
-Cube::Cube(glm::vec3 pos, glm::vec3 col) : GameObject(pos, col)
+Cube::Cube(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
 {}
 
 Cube::~Cube() // Destructor Called If out of scope. (Out of the Playable Space)

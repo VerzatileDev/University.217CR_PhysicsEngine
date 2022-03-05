@@ -3,7 +3,7 @@
 Sphere::Sphere()
 {}
 
-Sphere::Sphere(glm::vec3 pos, glm::vec3 col) : GameObject(pos, col)
+Sphere::Sphere(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
 {}
 
 Sphere::~Sphere()

@@ -5,7 +5,7 @@ class Quad2D : public GameObject // Libraries From GameObject
 {
 public:
 	Quad2D(); // Default constructor
-	Quad2D(glm::vec3 pos, glm::vec3 col); // Default constructor
+	Quad2D(float mas, glm::vec3 pos, glm::vec3 col); // Default constructor
 	~Quad2D();
 	void Draw();
 	void Update(float);

@@ -3,7 +3,7 @@
 Cone::Cone()
 {}
 
-Cone::Cone(glm::vec3 pos, glm::vec3 col) : GameObject(pos, col)
+Cone::Cone(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
 {}
 
 Cone::~Cone()

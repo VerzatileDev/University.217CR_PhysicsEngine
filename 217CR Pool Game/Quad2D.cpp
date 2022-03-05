@@ -4,7 +4,7 @@ Quad2D::Quad2D()
 {
 }
 
-Quad2D::Quad2D(glm::vec3 pos, glm::vec3 col) : GameObject(pos, col)
+Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
 {
 }
 

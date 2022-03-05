@@ -17,11 +17,11 @@ int newTimeSinceStart;
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
 
-GameObject* quad = new Quad2D(glm::vec3(0, 0, 0), glm::vec3(1.0f, 2.0f, 1.0f)); // white
-GameObject* cube = new Cube(glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
-GameObject* cube1 = new Cube(glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
-GameObject* sphere = new Sphere(glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
-GameObject* cone = new Cone(glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0)); // position, color
+GameObject* quad = new Quad2D(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0f, 2.0f, 1.0f)); // white
+GameObject* cube = new Cube(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
+GameObject* cube1 = new Cube(1.0f, glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
+GameObject* sphere = new Sphere(1.0f, glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
+GameObject* cone = new Cone(1.0f, glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0)); // position, color
 GameObject* particle = new Particle(1.0f, glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0)); // Mass, position, color
 
 void displayScene()

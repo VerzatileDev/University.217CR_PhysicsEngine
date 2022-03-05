@@ -4,12 +4,13 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <map>
+#include <iostream> // Deubg And console writeouts
 
 class GameObject
 {
 public:
 	GameObject();
-	GameObject(glm::vec3 pos, glm::vec3 col);
+	GameObject(float mas, glm::vec3 pos, glm::vec3 col);
 	~GameObject();
 	virtual void Draw() = 0; // Must Return Void As function is inside other class objects.
 	virtual void Update(float); // Derived Classes that have no existing Update function, will use One defined here.
@@ -21,4 +22,5 @@ public:
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	glm::vec3 position;
 	glm::vec3 color;
+	float mass;
 };

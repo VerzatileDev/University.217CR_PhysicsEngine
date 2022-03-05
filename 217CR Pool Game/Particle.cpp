@@ -1,5 +1,4 @@
 #include "Particle.h"
-#include <iostream>
 
 void Particle::Draw()
 {
@@ -12,9 +11,20 @@ void Particle::Draw()
 
 void Particle::Update(float deltaTime)
 {
+	/* Keyboard Force User Applied.*/
+	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
+		keyboardForce.y += 1.f * deltaTime;
+	else keyboardForce.y = 0;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
+	//	keyboardForce.y -= 1.f * deltaTime;
+	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true)
+		keyboardForce.x -= 1.f * deltaTime;
+	else if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true)
+		keyboardForce.x += 1.f * deltaTime;
+	else keyboardForce.x = 0;
+
 	//Give us the Forces applied to an object
 	CalculateForces();
-
 	//Calculate the new position for the object after force effects.
 	/*
 		Vt + dt = Vt +(at) + dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
@@ -26,18 +36,20 @@ void Particle::Update(float deltaTime)
 	futurePosition = position + (velocity)*deltaTime;
 	position = futurePosition;
 
+	//std::cout << velocity.y << std::endl;
 	/* Add this For Keyboard Use */
-	velocity *= pow(0.5, deltaTime); // damping
+	velocity *= pow(0.1, deltaTime); // damping
 }
 
-Particle::Particle(float m, glm::vec3 pos, glm::vec3 col) : GameObject(pos, col)
+Particle::Particle(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
 {
-	mass = m;                           // Weight of the Object which is relative to the world.
+	//Mass Reference in GameObject      // Weight of the Object which is relative to the world.
 	velocity = glm::vec3(0, 0, 0);      // Change of an Objects direction in regards to Time.
 	acceleration = glm::vec3(0, 0, 0);  // Throttle on the object (The amount an object accelerates in its worldspace)
 	totalForce = glm::vec3(0, 0, 0);    // All the forces effecting the object.
-	gravity = glm::vec3(0, -9.807, 0);  // Earth's Gravity (-) downwards Pull.
-	wind = glm::vec3(-2, 0, 0);         // Semi directional wind Force.
+	gravity = glm::vec3(0, -1, 0);      // Earth's Gravity (-9.807) downwards Pull.
+	wind = glm::vec3(-0.2, 0, 0);       // Semi directional wind Force.
+	keyboardForce = glm::vec3(0, 0, 0); // 
 	futurePosition = glm::vec3(0, 0, 0);// Future position of the object in the world map.
 }
 
@@ -50,6 +62,8 @@ void Particle::CalculateForces()
 	totalForce = glm::vec3(0, 0, 0); // Reset Forces
 	totalForce += gravity * mass;
 	totalForce += wind;
+	totalForce += keyboardForce;
+	std::cout << keyboardForce.y << std::endl;
 	acceleration = totalForce / mass;
 
 	// Developer Comments "  
