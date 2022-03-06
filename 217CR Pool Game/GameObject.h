@@ -2,6 +2,7 @@
 // Include Library Files To be used within a gameobject
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <GL/glut.h>  //print text to openglwindow
 #include <glm/glm.hpp>
 #include <map>
 #include <iostream> // Deubg And console writeouts

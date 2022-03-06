@@ -1,14 +1,17 @@
 #pragma comment(lib, "glew32.lib") 
 
+//System Libraries
 #include <vector> //for game Object list
 #include <iostream>
+#include <string>
+#include <cstring>
 
+//Class Defined lib
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
 #include "Particle.h"
 #include "Quad2D.h"
-
 
 /* Game Clock ( DeltaTime ) */
 int oldTimeSinceStart;
@@ -17,14 +20,20 @@ int newTimeSinceStart;
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
 
-/* OBJECT DETAILS :  MASS, POSITION, COLOR */
+/* OBJECT DETAILS : 
+MASS      default =  1.0f
+POSITION  default = vector3(0, 0, 0)
+COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
+*/
 
-GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), vector3(1.0f, 2.0f, 1.0f)); // white
+GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), vector3(1.0f, 2.0f, 1.0f));
 GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), vector3(1.0, 0.0, 0.0));
 GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), vector3(2.0, 1.0, 0.0));
 GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), vector3(0.0, 1.0, 0.0));
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), vector3(0.0, 1.0, 0.0));
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), vector3(0.0, 1.0, 0.0)); // Mass, position, color
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), vector3(0.0, 1.0, 0.0));
+
+
 
 void displayScene()
 {
@@ -32,12 +41,15 @@ void displayScene()
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Position the objects for viewing.
 
+	//glOrtho(-90.0, 100.0, -15.0, 100.0, 0.0, 1.0);
+
 	// DRAW GAMEOBJECTS from list After Push Back
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		objects[i]->Draw();
 	}
 	
+
 	glutSwapBuffers();
 }
 
@@ -161,6 +173,7 @@ void onExitProgram()
 		std::cout << " Released Memory of object num: " <<  i << std::endl;
 	}
 }
+
 
 /* GLUT runs a Console Application Beginning from Main()*/
 int main(int argc, char** argv)

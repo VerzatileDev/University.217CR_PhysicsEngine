@@ -2,7 +2,7 @@
 #include "GameObject.h"
 // IN GAMEOBJECT glm::vec3 is defined as vector3 !
 
-class RigidBody2D
+class RigidBody2D : public GameObject
 {
 private:
 	float mass;
@@ -13,6 +13,27 @@ private:
 
 	// Rotational Motion.
 	float rotationalInertia; // -- In case 3D inertia must be a matrix.
+	vector3 angularAcceleration;
+	vector3 angularVelocity;
+	float orientation;
+	// Shape Information ??   // circle, triangle, 
+	vector3 angularForces;
+
+	// Rectangle Information HardCode
+	float width = 1;
+	float length = 1;
+
+public:
+	// ! MAKE RETURNS VALUES OF POSITION AVAILABLE TO BE CALLED !
 	
+	void Draw();
+	void Update(float);
+	RigidBody2D(float mas, vector3 pos, vector3 col);
+	~RigidBody2D();
+
+	// Force Calculation Functions
+
+
+	// Return position values / Radius of objects rigidbody functons.
 
 };
