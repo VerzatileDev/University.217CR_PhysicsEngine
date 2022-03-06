@@ -20,8 +20,8 @@ void Cube::Draw()
 
 void Cube::Update(float deltaTime)
 {
-	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
-		position.y -= 5.f * deltaTime;
-	if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
-		position.y += 5.f * deltaTime;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
+	//	position.y -= 5.f * deltaTime;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
+	//	position.y += 5.f * deltaTime;
 }

@@ -17,26 +17,27 @@ int newTimeSinceStart;
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
 
+/* OBJECT DETAILS :  MASS, POSITION, COLOR */
+
 GameObject* quad = new Quad2D(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0f, 2.0f, 1.0f)); // white
 GameObject* cube = new Cube(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
 GameObject* cube1 = new Cube(1.0f, glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
 GameObject* sphere = new Sphere(1.0f, glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
-GameObject* cone = new Cone(1.0f, glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0)); // position, color
+GameObject* cone = new Cone(1.0f, glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
 GameObject* particle = new Particle(1.0f, glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0)); // Mass, position, color
 
 void displayScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
-	// Position the objects for viewing.
-	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Position the objects for viewing.
 
 	// DRAW GAMEOBJECTS from list After Push Back
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		objects[i]->Draw();
 	}
-
+	
 	glutSwapBuffers();
 }
 
@@ -45,7 +46,6 @@ void setup(void)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	/* PUSH Back Objects  ( Initialize )*/
-
 	objects.push_back(quad);
 	//objects.push_back(cube);
 	//objects.push_back(cube1);
@@ -118,7 +118,6 @@ void keySpecialInput(int key, int x, int y)
 		break;
 	default:
 		break;
-
 	}
 }
 
@@ -144,21 +143,22 @@ void idle()
 	//std::cout << "Delta Time (seconds): " << deltaTime << std::endl;
 	//std::cout << " --------------------------- " << std::endl;
 
-
+	// Updates objects position and details when defined within the class or enabled with initilization.
 	for (int i = 0; i < objects.size(); ++i)
 	{
-		objects[i]->Update(deltaTime); // Hard code deltaTime
+		objects[i]->Update(deltaTime);
 	}
 	glutPostRedisplay(); // Marks Window to be ReDisplayed <information at<https://www.opengl.org/resources/libraries/glut/spec3/node20.html>>
 }
 
 void onExitProgram()
 {
-	// CleanUp Code at the End of the Program when Exit is called.. 
+	// Cleans Up programs  Memory Loaded Objects when (Esc) key is called or Programs exits.
 	std::cout << "Reclaiming Memory.. " << std::endl;
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		delete objects[i];
+		std::cout << " Released Memory of object num: " <<  i << std::endl;
 	}
 }
 

@@ -14,7 +14,7 @@ void Particle::Update(float deltaTime)
 	/* Keyboard Force User Applied.*/
 	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
 		keyboardForce.y += 1.f * deltaTime;
-	else keyboardForce.y = 0;
+	else keyboardForce.y = 0; // Reset
 	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
 	//	keyboardForce.y -= 1.f * deltaTime;
 	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true)
@@ -37,7 +37,6 @@ void Particle::Update(float deltaTime)
 	position = futurePosition;
 
 	//std::cout << velocity.y << std::endl;
-	/* Add this For Keyboard Use */
 	velocity *= pow(0.1, deltaTime); // damping
 }
 
@@ -53,9 +52,8 @@ Particle::Particle(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, po
 	futurePosition = glm::vec3(0, 0, 0);// Future position of the object in the world map.
 }
 
-Particle::~Particle()
-{
-}
+Particle::~Particle() 
+{}
 
 void Particle::CalculateForces()
 {
