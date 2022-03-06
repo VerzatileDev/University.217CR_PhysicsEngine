@@ -7,7 +7,7 @@ std::map<int, bool> GameObject::NonACII_keyMap;
 GameObject::GameObject()
 {}
 
-GameObject::GameObject(float mas, glm::vec3 pos, glm::vec3 col)
+GameObject::GameObject(float mas, vector3 pos, vector3 col)
 {
 	position = pos;
 	color = col;

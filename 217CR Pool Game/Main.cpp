@@ -19,12 +19,12 @@ std::vector<GameObject*> objects; // List of Objects
 
 /* OBJECT DETAILS :  MASS, POSITION, COLOR */
 
-GameObject* quad = new Quad2D(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0f, 2.0f, 1.0f)); // white
-GameObject* cube = new Cube(1.0f, glm::vec3(0, 0, 0), glm::vec3(1.0, 0.0, 0.0));
-GameObject* cube1 = new Cube(1.0f, glm::vec3(0, 1, 0), glm::vec3(2.0, 1.0, 0.0));
-GameObject* sphere = new Sphere(1.0f, glm::vec3(0, -2, 0), glm::vec3(0.0, 1.0, 0.0));
-GameObject* cone = new Cone(1.0f, glm::vec3(1, -1, 0), glm::vec3(0.0, 1.0, 0.0));
-GameObject* particle = new Particle(1.0f, glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0)); // Mass, position, color
+GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), vector3(1.0f, 2.0f, 1.0f)); // white
+GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), vector3(1.0, 0.0, 0.0));
+GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), vector3(2.0, 1.0, 0.0));
+GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), vector3(0.0, 1.0, 0.0));
+GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), vector3(0.0, 1.0, 0.0));
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), vector3(0.0, 1.0, 0.0)); // Mass, position, color
 
 void displayScene()
 {

@@ -4,19 +4,19 @@
 class Particle : public GameObject
 {
 private:
-	glm::vec3 acceleration;
-	glm::vec3 velocity;
+	vector3 acceleration;
+	vector3 velocity;
 	// Position From GameObject
-	glm::vec3 totalForce;
-	glm::vec3 gravity;
-	glm::vec3 futurePosition;
-	glm::vec3 wind;
-	glm::vec3 keyboardForce;
+	vector3 totalForce;
+	vector3 gravity;
+	vector3 futurePosition;
+	vector3 wind;
+	vector3 keyboardForce;
 
 public:
 	void Draw();
 	void Update(float);
-	Particle(float m, glm::vec3 pos, glm::vec3 col);
+	Particle(float m, vector3 pos, vector3 col);
 	~Particle();
 	void CalculateForces();
 };

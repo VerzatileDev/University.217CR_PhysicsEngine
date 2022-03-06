@@ -5,7 +5,7 @@ class Cube : public GameObject // Libraries From GameObject
 {
 public:
 	Cube(); // Default constructor
-	Cube(float mas, glm::vec3 pos, glm::vec3 col); // Specified Constructor Initialz of the cube.
+	Cube(float mas, vector3 pos, vector3 col); // Specified Constructor Initialz of the cube.
 	~Cube();
 	void Draw();
 	void Update(float);

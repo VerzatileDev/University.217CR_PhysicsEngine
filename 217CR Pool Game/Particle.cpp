@@ -40,16 +40,16 @@ void Particle::Update(float deltaTime)
 	velocity *= pow(0.1, deltaTime); // damping
 }
 
-Particle::Particle(float mas, glm::vec3 pos, glm::vec3 col) : GameObject(mas, pos, col)
+Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
 {
 	//Mass Reference in GameObject      // Weight of the Object which is relative to the world.
-	velocity = glm::vec3(0, 0, 0);      // Change of an Objects direction in regards to Time.
-	acceleration = glm::vec3(0, 0, 0);  // Throttle on the object (The amount an object accelerates in its worldspace)
-	totalForce = glm::vec3(0, 0, 0);    // All the forces effecting the object.
-	gravity = glm::vec3(0, -1, 0);      // Earth's Gravity (-9.807) downwards Pull.
-	wind = glm::vec3(-0.2, 0, 0);       // Semi directional wind Force.
-	keyboardForce = glm::vec3(0, 0, 0); // 
-	futurePosition = glm::vec3(0, 0, 0);// Future position of the object in the world map.
+	velocity = vector3(0, 0, 0);      // Change of an Objects direction in regards to Time.
+	acceleration = vector3(0, 0, 0);  // Throttle on the object (The amount an object accelerates in its worldspace)
+	totalForce = vector3(0, 0, 0);    // All the forces effecting the object.
+	gravity = vector3(0, -1, 0);      // Earth's Gravity (-9.807) downwards Pull.
+	wind = vector3(-0.2, 0, 0);       // Semi directional wind Force.
+	keyboardForce = vector3(0, 0, 0); // 
+	futurePosition = vector3(0, 0, 0);// Future position of the object in the world map.
 }
 
 Particle::~Particle() 
@@ -57,7 +57,7 @@ Particle::~Particle()
 
 void Particle::CalculateForces()
 {
-	totalForce = glm::vec3(0, 0, 0); // Reset Forces
+	totalForce = vector3(0, 0, 0); // Reset Forces
 	totalForce += gravity * mass;
 	totalForce += wind;
 	totalForce += keyboardForce;
