@@ -34,6 +34,26 @@ GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), vector3(0.0, 1.0, 0.0));
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), vector3(0.0, 1.0, 0.0));
 
 
+char const* mystring = "mystring"; // Use this to define a constant char string.. 
+
+void renderBitmapString(float x, float y, char const* string)  // RENDER A TEXT TO DISPLAY
+{
+	int len;
+	glColor4f(1.0f, 0.0f, 0.0f, 0.0); // Color of the text displayed
+
+	glRasterPos2i(x, y); // Position of the text in 2d space
+
+	// Prints Text as an int 1 by 1 to screen of the string given.
+	for (int i = 0, len = strlen(string); i < len; i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)string[i]); // default font with size and width of the font / characters displayed to the screen.
+	}
+
+	// Referencing to look up to these informations about the functioning of this
+	// https://stackoverflow.com/questions/4917403/displaying-variables-in-glut Stackoverflow mentioning the Rendering of the text and use of fonts.
+	// https://stackoverflow.com/questions/4826481/c-char-vs-string
+}
+
 
 void displayScene()
 {
@@ -49,6 +69,8 @@ void displayScene()
 		objects[i]->Draw();
 	}
 	
+	renderBitmapString(0, 0, mystring); // Position where the Text gets displayed and what gets displayed.
+	renderBitmapString(2, 2, "Even Better Pool Game");
 
 	glutSwapBuffers();
 }
