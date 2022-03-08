@@ -27,26 +27,25 @@ COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
 */
 namespace Colors
 {
-	glm::vec3 White = glm::vec3(1.0f, 2.0f, 1.0f);
-	glm::vec3 Red = glm::vec3(1.0, 0.0, 0.0);
-	glm::vec3 Blue = glm::vec3(0.0f, 0.0f, 1.0f);
-	glm::vec3 Green = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 Purple = glm::vec3(0.0f, 0.0f, 1.0f);
-	glm::vec3 Cyan = glm::vec3(0.5f, 1.0f, 1.0f);
-	glm::vec3 Black = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 Orange = glm::vec3(1.0f, 0.5f, 0.0f);
-	glm::vec3 Violet = glm::vec3(0.5f, 0.5f, 0.5f);
-	glm::vec3 Lilac = glm::vec3(2.0f, 0.5f, 1.0f);
-	glm::vec3 Bronze = glm::vec3(0.1f, 0.1f, 0.0f);
-	glm::vec3 Brown = glm::vec3(0.1f, 0.0f, 0.0f);
-	glm::vec3 Forest_Green = glm::vec3(0.0f, 0.1f, 0.0f);
-	glm::vec3 Dark_Blue = glm::vec3(0.0f, 0.1f, 0.1f);
-	glm::vec3 Dark_Purple = glm::vec3(0.0f, 0.1f, 0.1f);
-	glm::vec3 Dark_Gray = glm::vec3(0.1f, 0.1f, 0.1f);
-	glm::vec3 Baby_Blue = glm::vec3(0.0f, 0.5f, 1.0f);
+	const glm::vec3 White = glm::vec3(1.0f, 2.0f, 1.0f);
+	const glm::vec3 Red = glm::vec3(1.0, 0.0, 0.0);
+	const glm::vec3 Blue = glm::vec3(0.0f, 0.0f, 1.0f);
+	const glm::vec3 Green = glm::vec3(0.0f, 1.0f, 0.0f);
+	const glm::vec3 Purple = glm::vec3(0.0f, 0.0f, 1.0f);
+	const glm::vec3 Cyan = glm::vec3(0.5f, 1.0f, 1.0f);
+	const glm::vec3 Black = glm::vec3(0.0f, 0.0f, 0.0f);
+	const glm::vec3 Orange = glm::vec3(1.0f, 0.5f, 0.0f);
+	const glm::vec3 Violet = glm::vec3(0.5f, 0.5f, 0.5f);
+	const glm::vec3 Lilac = glm::vec3(2.0f, 0.5f, 1.0f);
+	const glm::vec3 Bronze = glm::vec3(0.1f, 0.1f, 0.0f);
+	const glm::vec3 Brown = glm::vec3(0.1f, 0.0f, 0.0f);
+	const glm::vec3 Forest_Green = glm::vec3(0.0f, 0.1f, 0.0f);
+	const glm::vec3 Dark_Blue = glm::vec3(0.0f, 0.1f, 0.1f);
+	const glm::vec3 Dark_Purple = glm::vec3(0.0f, 0.1f, 0.1f);
+	const glm::vec3 Dark_Gray = glm::vec3(0.1f, 0.1f, 0.1f);
+	const glm::vec3 Baby_Blue = glm::vec3(0.0f, 0.5f, 1.0f);
 	// Code Values <https://pemavirtualhub.wordpress.com/2016/06/20/opengl-color-codes/>
 }
-
 
 
 /* OBJECT DETAILS :
