@@ -25,17 +25,44 @@ MASS      default =  1.0f
 POSITION  default = vector3(0, 0, 0)
 COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
 */
+namespace Colors
+{
+	glm::vec3 White = glm::vec3(1.0f, 2.0f, 1.0f);
+	glm::vec3 Red = glm::vec3(1.0, 0.0, 0.0);
+	glm::vec3 Blue = glm::vec3(0.0f, 0.0f, 1.0f);
+	glm::vec3 Green = glm::vec3(0.0f, 1.0f, 0.0f);
+	glm::vec3 Purple = glm::vec3(0.0f, 0.0f, 1.0f);
+	glm::vec3 Cyan = glm::vec3(0.5f, 1.0f, 1.0f);
+	glm::vec3 Black = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 Orange = glm::vec3(1.0f, 0.5f, 0.0f);
+	glm::vec3 Violet = glm::vec3(0.5f, 0.5f, 0.5f);
+	glm::vec3 Lilac = glm::vec3(2.0f, 0.5f, 1.0f);
+	glm::vec3 Bronze = glm::vec3(0.1f, 0.1f, 0.0f);
+	glm::vec3 Brown = glm::vec3(0.1f, 0.0f, 0.0f);
+	glm::vec3 Forest_Green = glm::vec3(0.0f, 0.1f, 0.0f);
+	glm::vec3 Dark_Blue = glm::vec3(0.0f, 0.1f, 0.1f);
+	glm::vec3 Dark_Purple = glm::vec3(0.0f, 0.1f, 0.1f);
+	glm::vec3 Dark_Gray = glm::vec3(0.1f, 0.1f, 0.1f);
+	glm::vec3 Baby_Blue = glm::vec3(0.0f, 0.5f, 1.0f);
+	// Code Values <https://pemavirtualhub.wordpress.com/2016/06/20/opengl-color-codes/>
+}
 
-GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), vector3(1.0f, 2.0f, 1.0f));
-GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), vector3(1.0, 0.0, 0.0));
-GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), vector3(2.0, 1.0, 0.0));
-GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), vector3(0.0, 1.0, 0.0));
-GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), vector3(0.0, 1.0, 0.0));
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), vector3(0.0, 1.0, 0.0));
 
 
-char const* mystring = "mystring"; // Use this to define a constant char string.. 
+/* OBJECT DETAILS :
+MASS      default =  1.0f
+POSITION  default = vector3(0, 0, 0)
+COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
+*/
+GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), Colors::Dark_Blue);
+GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors::Red); // yellow
+GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), Colors::Red);
+GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors::Green);
+GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors::Green);
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors::Green);
 
+
+char const* mystring = "mystring sad ads ad as da "; // Use this to define a constant char string.. 
 void renderBitmapString(float x, float y, char const* string)  // RENDER A TEXT TO DISPLAY
 {
 	int len;
@@ -52,6 +79,7 @@ void renderBitmapString(float x, float y, char const* string)  // RENDER A TEXT 
 	// Referencing to look up to these informations about the functioning of this
 	// https://stackoverflow.com/questions/4917403/displaying-variables-in-glut Stackoverflow mentioning the Rendering of the text and use of fonts.
 	// https://stackoverflow.com/questions/4826481/c-char-vs-string
+	// https://www.opengl.org/resources/libraries/glut/spec3/node76.html  glutBitmapCharacter
 }
 
 
@@ -69,7 +97,7 @@ void displayScene()
 		objects[i]->Draw();
 	}
 	
-	renderBitmapString(0, 0, mystring); // Position where the Text gets displayed and what gets displayed.
+	renderBitmapString(2, 0, mystring); // Position where the Text gets displayed and what gets displayed.
 	renderBitmapString(2, 2, "Even Better Pool Game");
 
 	glutSwapBuffers();
@@ -81,7 +109,7 @@ void setup(void)
 
 	/* PUSH Back Objects  ( Initialize )*/
 	objects.push_back(quad);
-	//objects.push_back(cube);
+	objects.push_back(cube);
 	//objects.push_back(cube1);
 	//objects.push_back(sphere);
 	//objects.push_back(cone);
