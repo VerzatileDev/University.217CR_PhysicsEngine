@@ -60,19 +60,16 @@ GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors::Green);
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors::Green);
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors::Green);
 
+float test; // Testing On updating a variable.. to screen
 
-char const* mystring = "mystring sad ads ad as da "; // Use this to define a constant char string.. 
-void renderBitmapString(float x, float y, char const* string)  // RENDER A TEXT TO DISPLAY
+
+void renderBitmapString(float x, float y, std::string str)  // RENDER A TEXT TO DISPLAY
 {
-	int len;
-	glColor4f(1.0f, 0.0f, 0.0f, 0.0); // Color of the text displayed
-
-	glRasterPos2i(x, y); // Position of the text in 2d space
-
-	// Prints Text as an int 1 by 1 to screen of the string given.
-	for (int i = 0, len = strlen(string); i < len; i++)
+	//glColor4f(1.0f, 0.0f, 0.0f, 0.0); // Color of the text displayed
+	glRasterPos2f(x, y); // Provide position of the Text
+	for (std::string::iterator c = (&str)->begin(); c != (&str)->end(); ++c)
 	{
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)string[i]); // default font with size and width of the font / characters displayed to the screen.
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *c);
 	}
 
 	// Referencing to look up to these informations about the functioning of this
@@ -96,8 +93,12 @@ void displayScene()
 		objects[i]->Draw();
 	}
 	
-	renderBitmapString(2, 0, mystring); // Position where the Text gets displayed and what gets displayed.
-	renderBitmapString(2, 2, "Even Better Pool Game");
+	
+
+	std::string a = "hello " + std::to_string(test);
+	renderBitmapString(1, 0, a); // These have to be in displayScene  (Update of object information in idle.
+	
+	
 
 	glutSwapBuffers();
 }
@@ -209,6 +210,8 @@ void idle()
 	{
 		objects[i]->Update(deltaTime);
 	}
+	test = deltaTime;  // <-- TESTING On updating screen variable
+	
 	glutPostRedisplay(); // Marks Window to be ReDisplayed <information at<https://www.opengl.org/resources/libraries/glut/spec3/node20.html>>
 }
 
