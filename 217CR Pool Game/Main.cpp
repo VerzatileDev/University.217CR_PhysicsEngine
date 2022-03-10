@@ -60,23 +60,7 @@ GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors::Green);
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors::Green);
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors::Green);
 
-float test; // Testing On updating a variable.. to screen
 
-
-void renderBitmapString(float x, float y, std::string str)  // RENDER A TEXT TO DISPLAY
-{
-	//glColor4f(1.0f, 0.0f, 0.0f, 0.0); // Color of the text displayed
-	glRasterPos2f(x, y); // Provide position of the Text
-	for (std::string::iterator c = (&str)->begin(); c != (&str)->end(); ++c)
-	{
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *c);
-	}
-
-	// Referencing to look up to these informations about the functioning of this
-	// https://stackoverflow.com/questions/4917403/displaying-variables-in-glut Stackoverflow mentioning the Rendering of the text and use of fonts.
-	// https://stackoverflow.com/questions/4826481/c-char-vs-string
-	// https://www.opengl.org/resources/libraries/glut/spec3/node76.html  glutBitmapCharacter
-}
 
 
 void displayScene()
@@ -94,9 +78,6 @@ void displayScene()
 	}
 	
 	
-
-	std::string a = "hello " + std::to_string(test);
-	renderBitmapString(1, 0, a); // These have to be in displayScene  (Update of object information in idle.
 	
 	
 
@@ -210,7 +191,7 @@ void idle()
 	{
 		objects[i]->Update(deltaTime);
 	}
-	test = deltaTime;  // <-- TESTING On updating screen variable
+	
 	
 	glutPostRedisplay(); // Marks Window to be ReDisplayed <information at<https://www.opengl.org/resources/libraries/glut/spec3/node20.html>>
 }

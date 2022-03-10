@@ -12,6 +12,7 @@ private:
 	vector3 futurePosition;
 	vector3 wind;
 	vector3 keyboardForce;
+	float r = 0.9f;
 
 public:
 	void Draw();

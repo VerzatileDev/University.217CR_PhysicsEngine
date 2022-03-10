@@ -6,8 +6,9 @@
 #include <glm/glm.hpp>
 #include <map>
 #include <iostream> // Deubg And console writeouts
+#include <string> // use specifically for display  RenderBitmap..
 
-#define vector3 glm::vec3 // Simplfy & make code cleaner to read.
+#define vector3 glm::vec3 // Simplfy & make code easily readable
 
 class GameObject
 {
@@ -21,6 +22,8 @@ public:
 	//Keys and Special Keys
 	static std::map<char, bool> ACII_keyMap;
 	static std::map<int, bool> NonACII_keyMap;
+
+	void renderBitmapString(float x, float y,float z, std::string str); // Display String Text Given to display with Position x / y  " displayed value "
 
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	vector3 position;

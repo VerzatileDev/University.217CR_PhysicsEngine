@@ -5,8 +5,13 @@ void Particle::Draw()
 	glPushMatrix();
 	glColor3f(color.x, color.y, color.z);
 	glTranslatef(position.x, position.y, position.z);
-	glutSolidSphere(0.5f, 10, 10);
+	glutSolidSphere(r, 30, 30);
 	glPopMatrix();
+
+	// Position.x -0.5 states here the text displayed from radius of the object
+	// Position.y + 0.3 states the Row for text displayed
+	GameObject::renderBitmapString(position.x - r, position.y, position.z, "  Position.y " + std::to_string(position.y));
+	GameObject::renderBitmapString(position.x - r, position.y + 0.3 , position.z, "  Position.x " + std::to_string(position.x));
 }
 
 void Particle::Update(float deltaTime)
@@ -36,7 +41,7 @@ void Particle::Update(float deltaTime)
 	futurePosition = position + (velocity)*deltaTime;
 	position = futurePosition;
 
-	//std::cout << velocity.y << std::endl;
+	//std::cout << velocity.y << std::endl; // Debug
 	velocity *= pow(0.1, deltaTime); // damping
 }
 
@@ -61,7 +66,7 @@ void Particle::CalculateForces()
 	totalForce += gravity * mass;
 	totalForce += wind;
 	totalForce += keyboardForce;
-	std::cout << keyboardForce.y << std::endl;
+	// std::cout << keyboardForce.y << std::endl;  // Debug on affected keyboardForce
 	acceleration = totalForce / mass;
 
 	// Developer Comments "  

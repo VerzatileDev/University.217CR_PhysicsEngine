@@ -16,6 +16,8 @@ void Cube::Draw()
 	glColor3f(color.x, color.y, color.z); // In RGB (Red, Blue, Green)
 	glutSolidCube(1.0f); // Size
 	glPopMatrix(); // Pops current matrix stack, replacing the current matrix with one below it on the stack..
+
+	GameObject::renderBitmapString(position.x, position.y, position.z, "    Position.y " + std::to_string(position.y));
 }
 
 void Cube::Update(float deltaTime)
