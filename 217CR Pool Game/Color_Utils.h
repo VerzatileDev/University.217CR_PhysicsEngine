@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 // Code Values Available at : <https://pemavirtualhub.wordpress.com/2016/06/20/opengl-color-codes/> 
+// Values Are Constant to avoid change in between processes in the engine.
 
 namespace Colors3f
 {

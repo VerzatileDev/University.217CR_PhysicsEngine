@@ -19,7 +19,7 @@ void Particle::Update(float deltaTime)
 	/* Keyboard Force User Applied.*/
 	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
 		keyboardForce.y += 1.f * deltaTime;
-	else keyboardForce.y = 0; // Reset
+	else keyboardForce.y = 0;
 	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
 	//	keyboardForce.y -= 1.f * deltaTime;
 	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true)
@@ -28,8 +28,8 @@ void Particle::Update(float deltaTime)
 		keyboardForce.x += 1.f * deltaTime;
 	else keyboardForce.x = 0;
 
-	//Give us the Forces applied to an object
-	CalculateForces();
+	CalculateForces();//Give us the Forces applied to an object
+
 	//Calculate the new position for the object after force effects.
 	/*
 		Vt + dt = Vt +(at) + dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
@@ -37,6 +37,7 @@ void Particle::Update(float deltaTime)
 
 		deltaTime -> Time taken From previous frame to next.
 	*/
+
 	velocity = velocity + (acceleration)*deltaTime;
 	futurePosition = position + (velocity)*deltaTime;
 	position = futurePosition;
@@ -52,7 +53,7 @@ Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, c
 	acceleration = vector3(0, 0, 0);  // Throttle on the object (The amount an object accelerates in its worldspace)
 	totalForce = vector3(0, 0, 0);    // All the forces effecting the object.
 	gravity = vector3(0, -1, 0);      // Earth's Gravity (-9.807) downwards Pull.
-	wind = vector3(-0.2, 0, 0);       // Semi directional wind Force.
+	wind = vector3(-0.2, 0, 0);       // 
 	keyboardForce = vector3(0, 0, 0); // 
 	futurePosition = vector3(0, 0, 0);// Future position of the object in the world map.
 }

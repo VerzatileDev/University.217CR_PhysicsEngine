@@ -16,10 +16,10 @@ private:
 	vector3 angularAcceleration;
 	vector3 angularVelocity;
 	float orientation;
-	// Shape Information ??   // circle, triangle, 
+	// Shape Information ?? // circle, triangle, box
 	vector3 angularForces;
 
-	// Rectangle Information HardCode
+	// Rectangle Information (HardCode)
 	float width = 1;
 	float length = 1;
 
@@ -34,6 +34,6 @@ public:
 	// Force Calculation Functions
 
 
-	// Return position values / Radius of objects rigidbody functons.
+	// Return position values / Radius of objects rigidbody functions.
 
 };

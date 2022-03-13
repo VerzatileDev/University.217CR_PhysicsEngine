@@ -1,10 +1,7 @@
 #pragma comment(lib, "glew32.lib") 
 
 //System Libraries
-#include <vector> //for game Object list
-#include <iostream>
-#include <string>
-#include <cstring>
+#include <vector> //For game Object list
 
 //Class Defined lib
 #include "Cube.h"
@@ -41,7 +38,6 @@ void displayScene()
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Position the objects for viewing.
 
-	//glOrtho(-90.0, 100.0, -15.0, 100.0, 0.0, 1.0);
 
 	// DRAW GAMEOBJECTS from list After Push Back
 	for (int i = 0; i < objects.size(); ++i)
@@ -112,7 +108,7 @@ void keyInputRelease(unsigned char key, int x, int y)
 // Input Non- ACII keys
 void keySpecialInput(int key, int x, int y)
 {
-	GameObject::NonACII_keyMap[key] = true; //Map Key use
+	GameObject::NonACII_keyMap[key] = true;
 	std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl; // Debug
 	switch (key)
 	{
@@ -172,7 +168,7 @@ void onExitProgram()
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		delete objects[i];
-		std::cout << " Released Memory of object num: " <<  i << std::endl;
+		std::cout << " Released Memory of object num: " <<  i + 1<< std::endl;
 	}
 }
 
