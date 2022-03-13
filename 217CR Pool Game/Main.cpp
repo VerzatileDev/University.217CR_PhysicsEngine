@@ -12,6 +12,7 @@
 #include "Cone.h"
 #include "Particle.h"
 #include "Quad2D.h"
+#include "Color_Utils.h" // Defines Usable color3f / color4f
 
 /* Game Clock ( DeltaTime ) */
 int oldTimeSinceStart;
@@ -20,47 +21,18 @@ int newTimeSinceStart;
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
 
-/* OBJECT DETAILS : 
-MASS      default =  1.0f
-POSITION  default = vector3(0, 0, 0)
-COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
-*/
-namespace Colors
-{
-	const glm::vec3 White = glm::vec3(1.0f, 2.0f, 1.0f);
-	const glm::vec3 Red = glm::vec3(1.0, 0.0, 0.0);
-	const glm::vec3 Blue = glm::vec3(0.0f, 0.0f, 1.0f);
-	const glm::vec3 Green = glm::vec3(0.0f, 1.0f, 0.0f);
-	const glm::vec3 Purple = glm::vec3(0.0f, 0.0f, 1.0f);
-	const glm::vec3 Cyan = glm::vec3(0.5f, 1.0f, 1.0f);
-	const glm::vec3 Black = glm::vec3(0.0f, 0.0f, 0.0f);
-	const glm::vec3 Orange = glm::vec3(1.0f, 0.5f, 0.0f);
-	const glm::vec3 Violet = glm::vec3(0.5f, 0.5f, 0.5f);
-	const glm::vec3 Lilac = glm::vec3(2.0f, 0.5f, 1.0f);
-	const glm::vec3 Bronze = glm::vec3(0.1f, 0.1f, 0.0f);
-	const glm::vec3 Brown = glm::vec3(0.1f, 0.0f, 0.0f);
-	const glm::vec3 Forest_Green = glm::vec3(0.0f, 0.1f, 0.0f);
-	const glm::vec3 Dark_Blue = glm::vec3(0.0f, 0.1f, 0.1f);
-	const glm::vec3 Dark_Purple = glm::vec3(0.0f, 0.1f, 0.1f);
-	const glm::vec3 Dark_Gray = glm::vec3(0.1f, 0.1f, 0.1f);
-	const glm::vec3 Baby_Blue = glm::vec3(0.0f, 0.5f, 1.0f);
-	// Code Values <https://pemavirtualhub.wordpress.com/2016/06/20/opengl-color-codes/>
-}
-
 
 /* OBJECT DETAILS :
 MASS      default =  1.0f
 POSITION  default = vector3(0, 0, 0)
-COLOR     default = vector3(1.0f, 2.0f, 1.0f)   " White "
+COLOR     default = vector3(1.0f, 2.0f, 1.0f) -> " White " / see Color_Utils for more
 */
-GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), Colors::Dark_Blue);
-GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors::Red); // yellow
-GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), Colors::Red);
-GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors::Green);
-GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors::Green);
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors::Green);
-
-
+GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), Colors3f::Dark_Blue);
+GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red); // yellow
+GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), Colors3f::Red);
+GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors3f::Green);
+GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green);
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green);
 
 
 void displayScene()
@@ -78,9 +50,6 @@ void displayScene()
 	}
 	
 	
-	
-	
-
 	glutSwapBuffers();
 }
 
