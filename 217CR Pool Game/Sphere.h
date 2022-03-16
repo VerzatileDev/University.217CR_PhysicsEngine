@@ -4,8 +4,9 @@
 class Sphere : public GameObject
 {
 public:
-	Sphere(); // Default constructor
-	Sphere(float mas, glm::vec3 pos, glm::vec3 col); // Specified Constructor Initialz of the Sphere.
-	~Sphere();
-	void Draw();
+	Sphere();                                       // Default Constructor without GameObject
+	Sphere(float mas, glm::vec3 pos, glm::vec3 col);// Constructor with GameObject
+	~Sphere();									    // Destructor
+	void Draw();									// Object Drawn Details
+	void Update(float);								// Object Updates Taking in deltaTime
 };

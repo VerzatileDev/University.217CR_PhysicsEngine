@@ -6,17 +6,18 @@ Cube::Cube()
 Cube::Cube(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
 {}
 
-Cube::~Cube() // Destructor Called If out of scope. (Out of the Playable Space)
+Cube::~Cube()
 {}
 
 void Cube::Draw()
 {
-	glPushMatrix(); // Defines that new element is being used
+	glPushMatrix();                                   // Defines that new element is being used
 	glTranslatef(position.x, position.y, position.z);
-	glColor3f(color.x, color.y, color.z); // In RGB (Red, Blue, Green)
-	glutSolidCube(1.0f); // Size
-	glPopMatrix(); // Pops current matrix stack, replacing the current matrix with one below it on the stack..
+	glColor3f(color.x, color.y, color.z);             // In RGB (Red, Blue, Green)
+	glutSolidCube(1.0f);                              // Size
+	glPopMatrix();                                    // Pops current matrix stack, replacing the current matrix with one below it on the stack..
 
+	/* Text Displayed On Screen from the Object */
 	GameObject::renderBitmapString(position.x, position.y, position.z, "    Position.y " + std::to_string(position.y));
 }
 

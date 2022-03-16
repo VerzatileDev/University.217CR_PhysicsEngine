@@ -19,7 +19,7 @@ int oldTimeSinceStart;
 int newTimeSinceStart;
 
 /* Game Objects */
-std::vector<GameObject*> objects; // List of Objects
+std::vector<GameObject*> objects;
 
 /* OBJECT DETAILS :
 MASS      default =  1.0f
@@ -38,10 +38,10 @@ void displayScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
-	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Position the objects for viewing.
+	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Position objects for viewing.
 
 
-	// DRAW GAMEOBJECTS from list After Push Back
+	// DRAW GAMEOBJECTS After Push Back
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		objects[i]->Draw();
@@ -55,7 +55,7 @@ void setup(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	/* PUSH Back Objects  ( Initialize )*/
+	/* ( Initialize OBJECTS ) */
 	objects.push_back(quad);
 	//objects.push_back(cube);
 	//objects.push_back(cube1);
@@ -63,7 +63,6 @@ void setup(void)
 	//objects.push_back(cone);
 	objects.push_back(particle);
 	//objects.push_back(rigidbody2d);
-
 }
 
 // Set Layout of the Window Displayed.
@@ -102,7 +101,6 @@ void keyInput(unsigned char key, int x, int y)
 		break;
 	}
 }
-
 void keyInputRelease(unsigned char key, int x, int y)
 {
 	GameObject::ACII_keyMap[key] = false;
@@ -132,7 +130,6 @@ void keySpecialInput(int key, int x, int y)
 		break;
 	}
 }
-
 void keySpecialInputRelease(int key, int x, int y)
 {
 	GameObject::NonACII_keyMap[key] = false;
@@ -180,32 +177,34 @@ void onExitProgram()
 /* GLUT runs a Console Application Beginning from Main()*/
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);  //Initialize GLUT
+	glutInit(&argc, argv);
 
-	glutInitContextVersion(2, 0); // Function Selects, Which OpenGl Version Is Requested when the Context of the Program is Created (Aims to find compatible/ supported extensions for this version)
+	glutInitContextVersion(2, 0); //Selects OpenGl Version Requested when the Context of the Program is Created (Aimed to find compatible/ supported extensions for this version)
 	glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE); // Makes Sure to Include Outdated profile functions and methods, other version to use is glut_core_profile.
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); // BitWise Xor  " Sets the bit if it is set in one operand but not both "
+	
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 	/* <https://www.opengl.org/resources/libraries/glut/spec3/node12.html>
-	Bit mask to select a double buffered window. This overrides GLUT_SINGLE if it is also specified.
-	Bit mask to select a window with a depth buffer.*/
+	   BitWise Xor " Sets the bit if it is set in one operand but not both "
+	   Bit mask to select a double buffered window. This overrides GLUT_SINGLE if it is also specified.
+	   Bit mask to select a window with a depth buffer.
+	*/
 
-	glutInitWindowSize(500, 500); // Set The Windows Initial Width and Height
-	glutInitWindowPosition(500, 200); // Position Window Starting Top - Left Corner
-	glutCreateWindow("9032499 Pool Game"); // Establish a Window with A given Title.
-	glutDisplayFunc(displayScene); // Register Display CallBack Handler for Window Contents.
-	glutReshapeFunc(resize); // Called WhenEver The Window Is Reshaped (< https://www.opengl.org/resources/libraries/glut/spec3/node48.html >)
-	glutKeyboardFunc(keyInput); // Recive Key Input from The User for ACII keys
-	glutKeyboardUpFunc(keyInputRelease); // Reset ACII keys
-	glutSpecialFunc(keySpecialInput); // Non-ACII keys.
-	glutSpecialUpFunc(keySpecialInputRelease); // Reset Non-ACII keys
-	glutIdleFunc(idle); // Performs Background Processing Taks or Animation, when Window is not Reciving any Events. ( Set Automatically, when Events are not Recived ) (< https://www.opengl.org/resources/libraries/glut/spec3/node63.html >)
-
+	glutInitWindowSize(500, 500);              // Set The Windows Initial Width and Height
+	glutInitWindowPosition(500, 200);          // Position Window Starting Top - Left Corner
+	glutCreateWindow("9032499 Pool Game");     // Establish a Window with A given Title.
+	glutDisplayFunc(displayScene);             // Register Display CallBack Handler for Window Contents.
+	glutReshapeFunc(resize);                   // Called WhenEver The Window Is Reshaped (< https://www.opengl.org/resources/libraries/glut/spec3/node48.html >)
+	glutKeyboardFunc(keyInput);                // Get ACII keys
+	glutKeyboardUpFunc(keyInputRelease);       // Reset ACII keys pushed
+	glutSpecialFunc(keySpecialInput);          // Get Non-ACII keys.
+	glutSpecialUpFunc(keySpecialInputRelease); // Reset Non-ACII keys pushed
+	glutIdleFunc(idle);                        // Performs Background Processing Taks or Animation, when Window is not Reciving any Events. 
+											   //( Set Automatically, when Events are not Recived ) (< https://www.opengl.org/resources/libraries/glut/spec3/node63.html >)
 	glewExperimental = GL_TRUE;
 	glewInit();
+	setup();                                   // Set Objects to the stack " Push - Back "
 
-	setup();
-
-	atexit(onExitProgram); // Called on Exit ( Initialized to before exit is called / made ready to be called "")
-	glutMainLoop(); // Recalls everything inside to Main to be Reloaded (Until a Stop in the program is called " Either Crash, Manual Exit With ACII key ESC (27)
-	
+	atexit(onExitProgram);                     // Clean Memory On Exit of Program
+	glutMainLoop();                            // Recalls everything inside to Main to be Reloaded 
+	                                           //(Until a Stop in the program is called " Either Crash, Manual Exit With ACII key ESC (27)
 }

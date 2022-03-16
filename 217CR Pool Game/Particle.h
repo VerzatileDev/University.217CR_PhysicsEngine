@@ -4,16 +4,16 @@
 class Particle : public GameObject
 {
 private:
-	// Position and Mass From GameObject
+	/* Position & Mass From GameObject */
 	vector3 LinearAcceleration = vector3(0, 0, 0);// Throttle on the object (The amount an object accelerates in its worldspace)
-	vector3 LinearVelocity = vector3(0, 0, 0);// Change of an Objects direction in regards to Time.
-	vector3 LinearTotalForce = vector3(0, 0, 0);// All the forces effecting the object.
-	vector3 gravity = vector3(0, -1, 0);// Earth's Gravity (-9.807) downwards Pull.
-	vector3 FuturePosition = vector3(0, 0, 0);// Future position of the object in the world map.
-	vector3 wind = vector3(-0.2, 0, 0); // Additional Force
-	vector3 keyboardForce = vector3(0, 0, 0);// Force Recived from Keyboard movement of the User
-	float r = 0.9f; // Radius of the Particle
-
+	vector3 LinearVelocity = vector3(0, 0, 0);    // Change of an Objects direction in regards to Time.
+	vector3 LinearTotalForce = vector3(0, 0, 0);  // All the forces effecting the object.
+	vector3 gravity = vector3(0, -1, 0);          // Earth's Gravity (-9.807) downwards Pull.
+	vector3 FuturePosition = vector3(0, 0, 0);    // Future position of the object in the world map.
+	vector3 wind = vector3(-0.2, 0, 0);           // Additional Force
+	vector3 keyboardForce = vector3(0, 0, 0);     // Force Recived from Keyboard movement of the User
+	float r = 0.9f;                               // Radius of the Particle " Hard Code "
+	
 	// Calculation
 	void CheckForKeyboard(float deltaTime);
 	void CalculateForces();
@@ -25,5 +25,4 @@ public:
 	void Update(float);
 	Particle(float m, vector3 pos, vector3 col);
 	~Particle();
-	
 };

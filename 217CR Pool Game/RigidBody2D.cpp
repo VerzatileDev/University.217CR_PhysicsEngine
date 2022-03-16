@@ -57,19 +57,23 @@ void RigidBody2D::CalculateForces()
 	AngularTorque = vector3(0, 0, 0);
 
 
-	/* LINEAR FORCEs */
-	// --- Forces Acting on an Object ---
+	/* LINEAR SUM FORCES */
+
+	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in ANGULAR MOMENT / TORQUE !*/
 	//LinearTotalForce += gravity * mass;
 	LinearTotalForce += AngularForceAffectingObject;
 
 
-	/* ANGULAR MOMENT / Torque */    
-	// ---- Formula Torque = r * F * sin (Angle)                       ----   
-	// ---- r = Distance between centre of mass and force applied.   ----
-	// ---- F = Force being applied                                  ----
+	                 /* ANGULAR MOMENT / Torque */  
+	// ------------------------------------------------------------------
+	// ----        Formula Torque = r * F * sin (Angle)              ----   
+	// ----  r = Distance between centre of mass and force applied.  ----
+	// ----             F = Force being applied                      ----
 	// ---- Sin angle = the angle that the force is being applied at ----
-	// 
+	// ------------------------------------------------------------------
 	// !! Each New Torque must include a position of the force being applied and the amount of Force applied !!
+	
+	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in Linear Motion (Force)*/
 	//AngularTorque += (position + GravityPosition) * (gravity * mass);
 	AngularTorque += (position + AngularForceAffectingObjectPosition) * AngularForceAffectingObject; // NewTon meters
 
@@ -81,25 +85,31 @@ void RigidBody2D::CalculateForces()
 
 void RigidBody2D::CalculateVelocity(float deltaTime)
 {
-	//Vt + dt = Vt + (at)+dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
+	/* LINEAR VELOCITY FORMULA */
+	// Vt + dt = Vt + (at)+dt;  
+	// dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
 	LinearVelocity = LinearVelocity + (LinearAcceleration)*deltaTime;
-	AngularVelocity += (AngularAcceleration)*deltaTime; // w ( Omega ) = 
-	/* Requires proper solving https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity */
+
+	/* ANGULAR VELOCITY FORMULA*/
+	// w ( Omega ) = ...   Based on --> /* Requires proper solving https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity */
+	AngularVelocity += (AngularAcceleration)*deltaTime;
+	
 }
 
 void RigidBody2D::SetDisplacements(float deltaTime)
 {
+	/* SET LINEAR MOTION DISPLACEMENT */
 	FuturePosition = position + (LinearVelocity)*deltaTime;
 	position = FuturePosition;
 
 	
-	if (orientation >= 360) orientation = 0;
 
-	// Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
-	orientation = orientation + (AngularVelocity.x) * deltaTime;
+	if (orientation >= 360) orientation = 0; // When 360 degrees is reached Reset the Orientation back to 0.
+	//if (orientation < 0) orientation = 360;
+	orientation = orientation + (AngularVelocity.x) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
 
 
-	// Dampening
+	// Dampening --> Force object to slowly reduce its own force being applied (Avoiding infinite Linear motion / Angular Motion)
 	LinearVelocity *= pow(0.1, deltaTime);
 	AngularVelocity *= pow(0.1, deltaTime);
 }
@@ -111,7 +121,7 @@ float RigidBody2D::SqrNumber(float Number)
 
 float RigidBody2D::FindInertia(float Length, float Height)
 {
-	// AngularInertia for 2d " 1/12 = 0.0833" -->   Logic ( 1/12 * m * (Length""2 + Height""2)
+	// AngularInertia for 2d " 1/12 = 0.0833" -->   Logic ( 1/12 * m * (Length""2 + Height""2)     <-- For rectangle
 	float LengthHeightTotal = (SqrNumber(Length) + SqrNumber(Height));
 	AngularInertia = 0.0833 * mass * LengthHeightTotal;
 	AngularInertia *= 9.8067; // Conversion to Newton Meters.
@@ -121,6 +131,7 @@ float RigidBody2D::FindInertia(float Length, float Height)
 
 float RigidBody2D::radiansToDegrees(float value)
 {
-	value = value * 180 / 3.14;
+	value *= 180;
+	value /= 3.14;
 	return value;
 }

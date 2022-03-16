@@ -1,5 +1,11 @@
 #include "Particle.h"
 
+Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
+{}
+
+Particle::~Particle()
+{}
+
 void Particle::Draw()
 {
 	glPushMatrix();
@@ -20,23 +26,17 @@ void Particle::Draw()
 	GameObject::renderBitmapString(position.x - r, position.y, position.z, "  Position.x " + std::to_string(position.x));
 	GameObject::renderBitmapString(position.x - r, position.y - 0.3 , position.z, "  Position.y " + std::to_string(position.y));
 	GameObject::renderBitmapString(position.x - r, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
-	//GameObject::renderBitmapString(position.x - r, position.y - 0.9, position.z, "  LinearForce.x " + std::to_string(LinearTotalForce.x));
-	GameObject::renderBitmapString(position.x - r, position.y - 1.2, position.z, "  LinearVelocity.y " + std::to_string(LinearVelocity.x));
+	GameObject::renderBitmapString(position.x - r, position.y - 0.9, position.z, "  LinearForce.x " + std::to_string(LinearTotalForce.x));
+	GameObject::renderBitmapString(position.x - r, position.y - 1.2, position.z, "  LinearVelocity.x " + std::to_string(LinearVelocity.x));
 }
 
 void Particle::Update(float deltaTime)
 {
-	CheckForKeyboard(deltaTime);/* Keyboard Force User Applied.*/
-	CalculateForces();// Find Forces Being applied to the Object
-	CalculateVelocity(deltaTime);// Find the displacement of the acceleration.
-	SetDisplacements(deltaTime);// Find the New Position of the Object After Forces being applied.
+	CheckForKeyboard(deltaTime);  /* Keyboard Force User Applied.*/
+	CalculateForces();            // Find Forces Being applied to the Object
+	CalculateVelocity(deltaTime); // Find the displacement of the acceleration.
+	SetDisplacements(deltaTime);  // Find the New Position of the Object After Forces being applied.
 }
-
-Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
-{}
-
-Particle::~Particle() 
-{}
 
 void Particle::CalculateForces()
 {

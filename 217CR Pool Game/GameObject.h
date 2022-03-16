@@ -28,5 +28,5 @@ public:
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	vector3 position;
 	vector3 color;
-	float mass = 1;
+	float mass = 1; // Set the Lowest Default Mass to be initialized with 1 if not Defined otherwise.
 };

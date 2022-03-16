@@ -6,12 +6,12 @@ class RigidBody2D : public GameObject
 {
 private:
 	/* Linear Motion*/
-	// Mass / Position from GameObject
+	// Mass & Position from GameObject
 	vector3 LinearAcceleration = vector3(0,0,0);
 	vector3 LinearVelocity = vector3(0, 0, 0);
 	vector3 FuturePosition = vector3(0, 0, 0);
 	vector3 LinearTotalForce = vector3(0, 0, 0);
-	vector3 gravity = vector3(0, -0.5f, 0);
+	
 
 	/* Rotational Motion.*/
 	float AngularInertia = 0.0;
@@ -19,13 +19,19 @@ private:
 	vector3 AngularAcceleration = vector3(0, 0, 0);
 	vector3 AngularVelocity = vector3(0, 0, 0);
 	vector3 AngularTorque = vector3(0, 0, 0);
+
+	/* FORCES AFFECTING OBJECT AND THEIR POSITION OF AFFECTION*/
+
+	// FORCE 1
+	vector3 gravity = vector3(0, -0.5f, 0);
 	vector3 GravityPosition = vector3(0, 0, 0);
 
+	// FORCE 2
 	vector3 AngularForceAffectingObject = vector3(2, 0, 0);
 	vector3 AngularForceAffectingObjectPosition = vector3(1, 1 , 0);
 
-	// Shape Information ? // circle, triangle, box
 
+	// Shape Information -->  circle, rectangle, cyllinder.  /* Current Shape information is a rectangle */
 	// Rectangle Information (HardCode)
 	float width = 0;
 	float length = 1;
