@@ -5,18 +5,76 @@ void Particle::Draw()
 	glPushMatrix();
 	glColor3f(color.x, color.y, color.z);
 	glTranslatef(position.x, position.y, position.z);
-	glutSolidSphere(r, 30, 30);
+	glutSolidSphere(r, 20, 20);
+	
+	// Displays A Point on the Object making it easier to see rotation.
+	glPointSize(5.0f);
+	glColor3f(1.f, 0.f, 0.f);
+	glBegin(GL_POINTS);
+	glVertex3f(r, 0, 0); // Location of the Point relative to the object
+	glEnd();
 	glPopMatrix();
 
-	// Position.x -0.5 states here the text displayed from radius of the object
+	// Position.x - r states here the text displayed from radius of the object
 	// Position.y + 0.3 states the Row for text displayed
-	GameObject::renderBitmapString(position.x - r, position.y, position.z, "  Position.y " + std::to_string(position.y));
-	GameObject::renderBitmapString(position.x - r, position.y + 0.3 , position.z, "  Position.x " + std::to_string(position.x));
+	GameObject::renderBitmapString(position.x - r, position.y, position.z, "  Position.x " + std::to_string(position.x));
+	GameObject::renderBitmapString(position.x - r, position.y - 0.3 , position.z, "  Position.y " + std::to_string(position.y));
+	GameObject::renderBitmapString(position.x - r, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
+	//GameObject::renderBitmapString(position.x - r, position.y - 0.9, position.z, "  LinearForce.x " + std::to_string(LinearTotalForce.x));
+	GameObject::renderBitmapString(position.x - r, position.y - 1.2, position.z, "  LinearVelocity.y " + std::to_string(LinearVelocity.x));
 }
 
 void Particle::Update(float deltaTime)
 {
-	/* Keyboard Force User Applied.*/
+	CheckForKeyboard(deltaTime);/* Keyboard Force User Applied.*/
+	CalculateForces();// Find Forces Being applied to the Object
+	CalculateVelocity(deltaTime);// Find the displacement of the acceleration.
+	SetDisplacements(deltaTime);// Find the New Position of the Object After Forces being applied.
+}
+
+Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
+{}
+
+Particle::~Particle() 
+{}
+
+void Particle::CalculateForces()
+{
+	LinearTotalForce = vector3(0, 0, 0); // Reset Force
+	LinearTotalForce += gravity * mass;
+	LinearTotalForce += wind;
+	LinearTotalForce += keyboardForce; // std::cout << keyboardForce.y << std::endl;// Debug
+	
+	/* ACCELERATION */
+	LinearAcceleration = LinearTotalForce / mass; // acceleration = Force/ mass
+
+	// Developer Comments "  
+	//1. In case the Mass were to change, for example some type of impact is the reason to Use *mass and then  /m to get the difference.
+	//2. Forces affecting the Object * It is best that each new force is applied seperatly *
+}
+
+void Particle::CalculateVelocity(float deltaTime)
+{
+	/*
+		Vt + dt = Vt +(at) + dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
+		deltaTime -> Time taken From previous frame to next.
+	*/
+	LinearVelocity += (LinearAcceleration)*deltaTime;
+	//std::cout << velocity.y << std::endl; // Debug
+}
+
+void Particle::SetDisplacements(float deltaTime)
+{
+	FuturePosition = position + (LinearVelocity)*deltaTime;
+	position = FuturePosition;
+
+	// Dampening " Makes sure that the object stops moving forever. To test Use Keyboard Only.
+	LinearVelocity *= pow(0.1, deltaTime);
+}
+
+void Particle::CheckForKeyboard(float deltaTime)
+{
+	/* Consider !! Having Force = 1.f Instead of applying + each time !!*/
 	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
 		keyboardForce.y += 1.f * deltaTime;
 	else keyboardForce.y = 0;
@@ -27,50 +85,4 @@ void Particle::Update(float deltaTime)
 	else if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true)
 		keyboardForce.x += 1.f * deltaTime;
 	else keyboardForce.x = 0;
-
-	CalculateForces();//Give us the Forces applied to an object
-
-	//Calculate the new position for the object after force effects.
-	/*
-		Vt + dt = Vt +(at) + dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
-		St + dt = St + (Vt) * dt; // St = Position (St +dt) -> Future position, St +(Vt) *dt  -> Current Position + (velocity of the object * deltaTime)
-
-		deltaTime -> Time taken From previous frame to next.
-	*/
-
-	velocity = velocity + (acceleration)*deltaTime;
-	futurePosition = position + (velocity)*deltaTime;
-	position = futurePosition;
-
-	//std::cout << velocity.y << std::endl; // Debug
-	velocity *= pow(0.1, deltaTime); // damping
-}
-
-Particle::Particle(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
-{
-	//Mass Reference in GameObject      // Weight of the Object which is relative to the world.
-	velocity = vector3(0, 0, 0);      // Change of an Objects direction in regards to Time.
-	acceleration = vector3(0, 0, 0);  // Throttle on the object (The amount an object accelerates in its worldspace)
-	totalForce = vector3(0, 0, 0);    // All the forces effecting the object.
-	gravity = vector3(0, -1, 0);      // Earth's Gravity (-9.807) downwards Pull.
-	wind = vector3(-0.2, 0, 0);       // 
-	keyboardForce = vector3(0, 0, 0); // 
-	futurePosition = vector3(0, 0, 0);// Future position of the object in the world map.
-}
-
-Particle::~Particle() 
-{}
-
-void Particle::CalculateForces()
-{
-	totalForce = vector3(0, 0, 0); // Reset Forces
-	totalForce += gravity * mass;
-	totalForce += wind;
-	totalForce += keyboardForce;
-	// std::cout << keyboardForce.y << std::endl;  // Debug on affected keyboardForce
-	acceleration = totalForce / mass;
-
-	// Developer Comments "  
-	//1. In case the Mass where to change for example some type of impact is the reason to Use *mass and then  /m to get the difference.
-	//2. Forces affecting the Object * It is best that each new force is applied seperatly *
 }

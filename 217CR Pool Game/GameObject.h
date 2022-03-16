@@ -28,5 +28,5 @@ public:
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	vector3 position;
 	vector3 color;
-	float mass;
+	float mass = 1;
 };

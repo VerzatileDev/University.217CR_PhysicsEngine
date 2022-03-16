@@ -3,13 +3,16 @@
 //System Libraries
 #include <vector> //For game Object list
 
+// Resource Files
+#include "Color_Utils.h" // Defines Usable color3f / color4f
+
 //Class Defined lib
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cone.h"
 #include "Particle.h"
 #include "Quad2D.h"
-#include "Color_Utils.h" // Defines Usable color3f / color4f
+#include "RigidBody2D.h"
 
 /* Game Clock ( DeltaTime ) */
 int oldTimeSinceStart;
@@ -18,18 +21,17 @@ int newTimeSinceStart;
 /* Game Objects */
 std::vector<GameObject*> objects; // List of Objects
 
-
 /* OBJECT DETAILS :
 MASS      default =  1.0f
 POSITION  default = vector3(0, 0, 0)
 COLOR     default = vector3(1.0f, 2.0f, 1.0f) -> " White " / see Color_Utils for more
 */
 GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), Colors3f::Dark_Blue);
-GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red); // yellow
-GameObject* cube1 = new Cube(1.0f, vector3(0, 1, 0), Colors3f::Red);
+GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red);
 GameObject* sphere = new Sphere(1.0f, vector3(0, -2, 0), Colors3f::Green);
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green);
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green);
+GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(0, 0, 0), Colors3f::Orange);
 
 
 void displayScene()
@@ -55,11 +57,13 @@ void setup(void)
 
 	/* PUSH Back Objects  ( Initialize )*/
 	objects.push_back(quad);
-	objects.push_back(cube);
+	//objects.push_back(cube);
 	//objects.push_back(cube1);
 	//objects.push_back(sphere);
 	//objects.push_back(cone);
 	objects.push_back(particle);
+	//objects.push_back(rigidbody2d);
+
 }
 
 // Set Layout of the Window Displayed.
@@ -190,10 +194,10 @@ int main(int argc, char** argv)
 	glutCreateWindow("9032499 Pool Game"); // Establish a Window with A given Title.
 	glutDisplayFunc(displayScene); // Register Display CallBack Handler for Window Contents.
 	glutReshapeFunc(resize); // Called WhenEver The Window Is Reshaped (< https://www.opengl.org/resources/libraries/glut/spec3/node48.html >)
-	glutKeyboardFunc(keyInput); // Recive Key Input from The User for ACII keys - Maps.
-	glutKeyboardUpFunc(keyInputRelease);
-	glutSpecialFunc(keySpecialInput); // Non- ACII keys.
-	glutSpecialUpFunc(keySpecialInputRelease);
+	glutKeyboardFunc(keyInput); // Recive Key Input from The User for ACII keys
+	glutKeyboardUpFunc(keyInputRelease); // Reset ACII keys
+	glutSpecialFunc(keySpecialInput); // Non-ACII keys.
+	glutSpecialUpFunc(keySpecialInputRelease); // Reset Non-ACII keys
 	glutIdleFunc(idle); // Performs Background Processing Taks or Animation, when Window is not Reciving any Events. ( Set Automatically, when Events are not Recived ) (< https://www.opengl.org/resources/libraries/glut/spec3/node63.html >)
 
 	glewExperimental = GL_TRUE;
