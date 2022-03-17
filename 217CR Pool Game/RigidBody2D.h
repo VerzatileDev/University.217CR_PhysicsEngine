@@ -1,6 +1,5 @@
 #pragma once
 #include "GameObject.h"
-// IN GAMEOBJECT glm::vec3 is defined as vector3 !
 
 class RigidBody2D : public GameObject
 {

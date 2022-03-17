@@ -1,9 +1,11 @@
 #pragma once
 // Include Library Files To be used within a gameobject
-#include <GL/glew.h>
-#include <GL/freeglut.h>
-#include <GL/glut.h>  //print text to openglwindow
+#include <GL/glew.h>	 // Not Nessecary can be removed
+#include <GL/freeglut.h> // Not Nessecary can be removed
+#include <GL/glut.h>     //print text to openglwindow
 #include <glm/glm.hpp>
+
+// Game Object Specific Includes
 #include <map>
 #include <iostream> // Deubg And console writeouts
 #include <string> // use specifically for display  RenderBitmap..

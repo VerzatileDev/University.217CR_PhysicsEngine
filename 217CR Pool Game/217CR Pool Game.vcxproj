@@ -143,21 +143,25 @@
   <ItemGroup>
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Quad2D.cpp" />
     <ClCompile Include="RigidBody2D.cpp" />
+    <ClCompile Include="RigidBody3D.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color_Utils.h" />
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Quad2D.h" />
     <ClInclude Include="RigidBody2D.h" />
+    <ClInclude Include="RigidBody3D.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

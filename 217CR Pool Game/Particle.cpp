@@ -77,6 +77,7 @@ void Particle::CheckForKeyboard(float deltaTime)
 	/* Consider !! Having Force = 1.f Instead of applying + each time !!*/
 	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
 		keyboardForce.y += 1.f * deltaTime;
+		//keyboardForce.y = 5f; //<-- Use this for more strict control of particle, with gravity.
 	else keyboardForce.y = 0;
 	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
 	//	keyboardForce.y -= 1.f * deltaTime;

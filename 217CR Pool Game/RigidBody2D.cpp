@@ -60,7 +60,7 @@ void RigidBody2D::CalculateForces()
 	/* LINEAR SUM FORCES */
 
 	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in ANGULAR MOMENT / TORQUE !*/
-	//LinearTotalForce += gravity * mass;
+	LinearTotalForce += gravity * mass;
 	LinearTotalForce += AngularForceAffectingObject;
 
 
@@ -74,7 +74,7 @@ void RigidBody2D::CalculateForces()
 	// !! Each New Torque must include a position of the force being applied and the amount of Force applied !!
 	
 	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in Linear Motion (Force)*/
-	//AngularTorque += (position + GravityPosition) * (gravity * mass);
+	AngularTorque += (position + GravityPosition) * (gravity * mass);
 	AngularTorque += (position + AngularForceAffectingObjectPosition) * AngularForceAffectingObject; // NewTon meters
 
 	
@@ -106,7 +106,7 @@ void RigidBody2D::SetDisplacements(float deltaTime)
 
 	if (orientation >= 360) orientation = 0; // When 360 degrees is reached Reset the Orientation back to 0.
 	//if (orientation < 0) orientation = 360;
-	orientation = orientation + (AngularVelocity.x) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
+	orientation = orientation + (AngularVelocity.y) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
 
 
 	// Dampening --> Force object to slowly reduce its own force being applied (Avoiding infinite Linear motion / Angular Motion)
