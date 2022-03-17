@@ -18,7 +18,7 @@ GameEngine Engine;
 /* GLUT runs a Console Application Beginning from Main()*/
 int main(int argc, char** argv)
 {
-	Engine.InitEngine(argc, argv, "GameEngine Window", 500, 500);
+	Engine.InitEngine(argc, argv, "9032499 Pool Game", 500, 500);
 
 	// Push Back Objects (Initialize)
 	Engine.AddGameObject(particle);
