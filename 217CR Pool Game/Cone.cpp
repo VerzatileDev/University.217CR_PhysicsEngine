@@ -19,5 +19,5 @@ void Cone::Draw()
 	glPopMatrix();                                   // Pops the current matrix stack, replacing the current matrix with one below it on the stack..
 }
 
-void Cone::Update(float)
+void Cone::Update(float deltaTime)
 {}

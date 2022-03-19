@@ -106,7 +106,7 @@ void RigidBody2D::SetDisplacements(float deltaTime)
 
 	if (orientation >= 360) orientation = 0; // When 360 degrees is reached Reset the Orientation back to 0.
 	//if (orientation < 0) orientation = 360;
-	orientation = orientation + (AngularVelocity.y) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
+	orientation = orientation + (AngularVelocity.x) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
 
 
 	// Dampening --> Force object to slowly reduce its own force being applied (Avoiding infinite Linear motion / Angular Motion)

@@ -4,7 +4,7 @@ void RigidBody3D::Draw()
 {
 }
 
-void RigidBody3D::Update(float)
+void RigidBody3D::Update(float deltaTime)
 {
 }
 

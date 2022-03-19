@@ -151,6 +151,7 @@
     <ClCompile Include="RigidBody2D.cpp" />
     <ClCompile Include="RigidBody3D.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color_Utils.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="RigidBody2D.h" />
     <ClInclude Include="RigidBody3D.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphereCollider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
