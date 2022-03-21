@@ -8,9 +8,6 @@
 //System Libraries
 #include <vector> //For game Object list
 
-// Resource Files
-#include "Color_Utils.h" // Defines Usable color3f / color4f
-
 //Class Defined lib
 #include "Cube.h"
 #include "Sphere.h"
@@ -25,7 +22,6 @@ class GameEngine
 {
 private:
 	static std::vector<GameObject*> objects; // Store Objects to a vector list to be called and used.
-	
 	static void UpdateGame(void); //Each thing needs to be static
 	static void DisplayScene(void); //Draw Game
 

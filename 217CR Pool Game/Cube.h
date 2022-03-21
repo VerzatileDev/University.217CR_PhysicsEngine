@@ -3,10 +3,14 @@
 
 class Cube : public GameObject
 {
+private:
+	void CheckInput(float deltaTime);
+protected:
+	bool UserInput;
 public:
-	Cube();                                   // Default Constructor without GameObject
-	Cube(float mas, vector3 pos, vector3 col);// Constructor with GameObject
-	~Cube();                                  // Destructor
-	void Draw();							  // Object Drawn Details
-	void Update(float);                       // Object Updates Taking in deltaTime
+	Cube();														// Default Constructor without GameObject
+	Cube(float mas, vector3 pos, vector3 col, bool KeyboardUse);// Constructor with GameObject
+	~Cube();													// Destructor
+	void Draw();												// Object Drawn Details
+	void Update(float);											// Object Updates Taking in deltaTime
 };

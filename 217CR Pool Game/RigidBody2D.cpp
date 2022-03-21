@@ -27,7 +27,8 @@ void RigidBody2D::Draw()
 	GameObject::renderBitmapString(position.x - length, position.y - 0.3, position.z, "  Position.y " + std::to_string(position.y));
 	GameObject::renderBitmapString(position.x - length, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
 	GameObject::renderBitmapString(position.x - length, position.y - 0.9, position.z, "  AngularVelocity.x " + std::to_string(AngularVelocity.x));
-	GameObject::renderBitmapString(position.x - length, position.y - 1.2, position.z, "  orientation " + std::to_string(orientation));
+	GameObject::renderBitmapString(position.x - length, position.y - 1.2, position.z, "  LinearVelocity.x " + std::to_string(LinearVelocity.x));
+	GameObject::renderBitmapString(position.x - length, position.y - 1.5, position.z, "  orientation " + std::to_string(orientation));
 
 }
 
@@ -88,7 +89,7 @@ void RigidBody2D::CalculateVelocity(float deltaTime)
 	/* LINEAR VELOCITY FORMULA */
 	// Vt + dt = Vt + (at)+dt;  
 	// dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
-	LinearVelocity = LinearVelocity + (LinearAcceleration)*deltaTime;
+	LinearVelocity += (LinearAcceleration)*deltaTime;
 
 	/* ANGULAR VELOCITY FORMULA*/
 	// w ( Omega ) = ...   Based on --> /* Requires proper solving https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity */

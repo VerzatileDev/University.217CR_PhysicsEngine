@@ -1,10 +1,28 @@
 #include "Cube.h"
 
+void Cube::CheckInput(float deltaTime)
+{
+	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true) {
+		position.y += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true) {
+		position.y -= 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true) {
+		position.x += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true) {
+		position.x -= 1.f * deltaTime;
+	}
+}
+
 Cube::Cube()
 {}
 
-Cube::Cube(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
-{}
+Cube::Cube(float mas, vector3 pos, vector3 col, bool KeyboardUse) : GameObject(mas, pos, col)
+{
+	UserInput = KeyboardUse;
+}
 
 Cube::~Cube()
 {}
@@ -23,8 +41,5 @@ void Cube::Draw()
 
 void Cube::Update(float deltaTime)
 {
-	//if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
-	//	position.y -= 5.f * deltaTime;
-	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
-	//	position.y += 5.f * deltaTime;
+	if (UserInput) CheckInput(deltaTime);
 }

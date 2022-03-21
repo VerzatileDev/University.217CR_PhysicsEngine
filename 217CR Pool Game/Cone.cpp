@@ -1,10 +1,28 @@
 #include "Cone.h"
 
+void Cone::CheckInput(float deltaTime)
+{
+	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true) {
+		position.y += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true) {
+		position.y -= 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true) {
+		position.x += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true) {
+		position.x -= 1.f * deltaTime;
+	}
+}
+
 Cone::Cone()
 {}
 
-Cone::Cone(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
-{}
+Cone::Cone(float mas, vector3 pos, vector3 col, bool KeyboardUse) : GameObject(mas, pos, col)
+{
+	UserInput = KeyboardUse;
+}
 
 Cone::~Cone()
 {}
@@ -20,4 +38,6 @@ void Cone::Draw()
 }
 
 void Cone::Update(float deltaTime)
-{}
+{
+	if (UserInput) CheckInput(deltaTime);
+}

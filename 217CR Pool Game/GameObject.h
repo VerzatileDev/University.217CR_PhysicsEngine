@@ -25,10 +25,9 @@ public:
 	static std::map<char, bool> ACII_keyMap;
 	static std::map<int, bool> NonACII_keyMap;
 
-	void renderBitmapString(float x, float y,float z, std::string str); // Display String Text Given to display with Position x / y  " displayed value "
-
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	vector3 position;
 	vector3 color;
 	float mass = 1; // Set the Lowest Default Mass to be initialized with 1 if not Defined otherwise.
+	void renderBitmapString(float x, float y, float z, std::string str); // Display String Text Given to display with Position x / y  " displayed value "
 };

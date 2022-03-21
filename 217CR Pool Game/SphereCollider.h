@@ -1,17 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
-class SphereCollider : GameObject
+class SphereCollider
 {
-private:
-	float radius = 1.0;
-	// position from gameObject  And is same as the initial Sphere.
-
+protected:
+	vector3 SphereColliderPosition;
+	vector3 SphereColliderColor;
+	float radius = 1.0f;
 public:
 	int CollideCheck(SphereCollider); //Collision Check returns boolean depending if the Collision happened or not.
-	SphereCollider(float mas, vector3 pos, vector3 col); // Constructor
+	SphereCollider(vector3 SphereColliderPosition, vector3 SphereColliderColor, float radius); // Constructor
+	SphereCollider(); // deafault Constructor
 	~SphereCollider(); // Destructor
-
 	void Draw();
-
 };

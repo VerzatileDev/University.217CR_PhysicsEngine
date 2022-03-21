@@ -83,5 +83,8 @@
     <ClInclude Include="SphereCollider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Default_Utils.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

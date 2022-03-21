@@ -1,11 +1,28 @@
 #include "Quad2D.h"
 
+void Quad2D::CheckInput(float deltaTime)
+{
+	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true) {
+		position.y += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true) {
+		position.y -= 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true) {
+		position.x += 1.f * deltaTime;
+	}
+	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true) {
+		position.x -= 1.f * deltaTime;
+	}
+}
+
 Quad2D::Quad2D()
 {}
 
-Quad2D::Quad2D(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
-{}
-
+Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse) : GameObject(mas, pos, col)
+{
+	UserInput = KeyboardUse;
+}
 
 Quad2D::~Quad2D()
 {}
@@ -24,4 +41,6 @@ void Quad2D::Draw()
 }
 
 void Quad2D::Update(float deltaTime)
-{}
+{
+	if (UserInput) CheckInput(deltaTime);
+}

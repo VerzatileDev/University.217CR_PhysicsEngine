@@ -50,23 +50,23 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 	glutKeyboardFunc([](unsigned char key, int x, int y)
 	{
 		GameObject::ACII_keyMap[key] = true;
-		std::cout << "Key pressed: " << key << " : " << GameObject::ACII_keyMap[key] << std::endl; // Debug
+		//std::cout << "Key pressed: " << key << " : " << GameObject::ACII_keyMap[key] << std::endl; // Debug
 		switch (key)
 		{
 		case 27:
 			exit(0);
 			break;
 		case 'w':
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case 's':
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case 'a':
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case 'd':
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		default:
 			break;
@@ -84,20 +84,20 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 	glutSpecialFunc([](int key, int x, int y)
 	{
 		GameObject::NonACII_keyMap[key] = true;
-		std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl; // Debug
+		//std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl; // Debug
 		switch (key)
 		{
 		case GLUT_KEY_UP:
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case GLUT_KEY_DOWN:
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case GLUT_KEY_LEFT:
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		case GLUT_KEY_RIGHT:
-			std::cout << "Using key: " << key << std::endl;
+			//std::cout << "Using key: " << key << std::endl;
 			break;
 		default:
 			break;
@@ -108,7 +108,7 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 	glutSpecialUpFunc([](int key, int x, int y)
 	{
 		GameObject::NonACII_keyMap[key] = false;
-		std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl;
+		//std::cout << "Key pressed: " << key << " : " << GameObject::NonACII_keyMap[key] << std::endl;
 	});
 	
 	// Clean Memory On Exit of Program
@@ -119,8 +119,9 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 		for (int i = 0; i < objects.size(); ++i)
 		{
 			delete objects[i];
-			std::cout << " Released Memory of object num: " << i + 1 << std::endl;
+			std::cout << "Released Memory of object num: " << i + 1 << std::endl;
 		}
+		std::cout << "\n! Reclaiming Memory Complete ! " << std::endl;
 	});
 }
 
