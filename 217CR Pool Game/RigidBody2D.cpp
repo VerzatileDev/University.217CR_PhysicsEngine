@@ -2,7 +2,7 @@
 
 void RigidBody2D::Draw()
 {
-	/* !!  ONly Use this For Testign Purposes  !!*/
+	/* !!  ONly Use this For Testing Purposes  !!*/
 	glPushMatrix();
 
 	glTranslatef(GameObject::position.x, GameObject::position.y, GameObject::position.z);
@@ -36,14 +36,13 @@ void RigidBody2D::Draw()
 
 void RigidBody2D::Update(float deltaTime)
 {
-	//std::cout << AngularInertia << std::endl;
-	CalculateForces();  // Linear (Euler method of calculation to find new position)
+	//std::cout << AngularInertia << std::endl; // Use this to test a single Object such as Circle or Quad2D
+	CalculateForces();							// Linear (Euler method of calculation to find new position)
 	CalculateVelocity(deltaTime);
 	SetDisplacements(deltaTime);
-
-	// These Are Used For RigidBody Details When Applied to an Object.
+												// These Are Used For RigidBody Details When Applied to an Object.
 	ShowLinearVelocity = LinearVelocity;
-	ShowAngularVelocity = AngularVelocity; // <-- These Elements are Used in External Class such as Quad2D !!
+	ShowAngularVelocity = AngularVelocity;		// <-- These Elements are Used in External Class such as Quad2D and Circle !!
 }
 
 RigidBody2D::RigidBody2D(float mas, vector3 pos, vector3 col, int UsingRigidBody2D) : GameObject(mas, pos, col), Point()
@@ -152,8 +151,8 @@ float RigidBody2D::FindInertia(float Length, float Height)
 	if (UsingRigidBody2DType == 1)
 	{
 		AngularInertia = 3.14159; // Pi = 3.14159
-		float DiameterSqrSqr = (SqrNumber((SqrNumber(RigidBodyRadius))));
-		AngularInertia /= DiameterSqrSqr;
+		float RadiusSqrSqr = (SqrNumber((SqrNumber(RigidBodyRadius))));
+		AngularInertia /= RadiusSqrSqr;
 		AngularInertia /= 4;
 	}
 

@@ -26,9 +26,8 @@ Quad2D::Quad2D()
 Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
 {
 	UserInput = KeyboardUse;
-	RigidBodyUsed = UsingRigidBody2D; // 0 non, 1 circle, 2 rectangle.
-	
-	ShowDetails = ShowingDetailsOnObject; // True false
+	RigidBodyUsed = UsingRigidBody2D;     // 0 non, 1 circle, 2 rectangle.
+	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
 }
 
 Quad2D::~Quad2D()
