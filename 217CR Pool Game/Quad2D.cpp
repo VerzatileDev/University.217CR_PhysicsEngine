@@ -80,9 +80,5 @@ void Quad2D::Update(float deltaTime)
 		angle = RigidBody2D::orientation;
 	}
 	else return;
-	
-	
-
-
 
 }

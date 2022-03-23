@@ -36,7 +36,7 @@ void RigidBody2D::Draw()
 
 void RigidBody2D::Update(float deltaTime)
 {
-	std::cout << AngularInertia << std::endl;
+	//std::cout << AngularInertia << std::endl;
 	CalculateForces();  // Linear (Euler method of calculation to find new position)
 	CalculateVelocity(deltaTime);
 	SetDisplacements(deltaTime);
