@@ -10,9 +10,11 @@
 #include <iostream> // Deubg And console writeouts
 #include <string> // use specifically for display  RenderBitmap..
 
+#include "Point.h"
+
 #define vector3 glm::vec3 // Simplfy & make code easily readable
 
-class GameObject
+class GameObject : public Point
 {
 public:
 	GameObject();

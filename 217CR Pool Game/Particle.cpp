@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle(float mas, vector3 pos, vector3 col, bool KeyboardUse) : GameObject(mas, pos, col)
+Particle::Particle(float mas, vector3 pos, vector3 col, bool KeyboardUse) : GameObject(mas, pos, col), Point()
 {
 	UserInput = KeyboardUse;
 }
@@ -15,12 +15,12 @@ void Particle::Draw()
 	glTranslatef(position.x, position.y, position.z);
 	glutSolidSphere(radius, 20, 20);
 	
-	// Displays A Point on the Object making it easier to see rotation.
-	glPointSize(5.0f);
-	glColor3f(1.f, 0.f, 0.f);
-	glBegin(GL_POINTS);
-	glVertex3f(radius, 0, 0); // Location of the Point relative to the object
-	glEnd();
+	// Displays A Point on the Object making it easier to see rotation. " See Point class for more Information !"
+	Point::size = 5.0f;
+	Point::pointColor = Colors3f::Red;
+	Point::pointLocation = vector3(radius, 0, 0);
+	Point::Draw();
+
 	glPopMatrix();
 
 	// Position.x - r states here the text displayed from radius of the object
@@ -39,6 +39,9 @@ void Particle::Update(float deltaTime)
 	CalculateVelocity(deltaTime);				// Find the displacement of the acceleration.
 	SetDisplacements(deltaTime);				// Find the New Position of the Object After Forces being applied.
 }
+
+Particle::Particle()
+{}
 
 void Particle::CalculateForces()
 {

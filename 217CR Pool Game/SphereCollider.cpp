@@ -21,7 +21,7 @@ SphereCollider::~SphereCollider()
 void SphereCollider::Draw()
 {
 	glPushMatrix();
-	glColor3f(1.f, 0.f, 1.0f); //Magenta is the best debug colour!
+	glColor3f(SphereColliderColor.x, SphereColliderColor.y, SphereColliderColor.z); //Magenta is the best debug colour!
 	glTranslatef(SphereColliderPosition.x, SphereColliderPosition.y, SphereColliderPosition.z);
 	glutWireSphere(radius, 10, 10);
 	glPopMatrix();

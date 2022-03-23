@@ -5,10 +5,11 @@
 class Sphere : public GameObject, public SphereCollider
 {
 private:
-	void CheckInput(float deltaTime);
+	
 protected:
 	float radius = 1.0f;
-	bool UserInput;
+	bool UserInput = false;
+	void CheckInput(float deltaTime);
 public:
 	Sphere();														  // Default Constructor without GameObject
 	Sphere(float mas, vector3 pos, vector3 col, bool KeyboardUse);    // Constructor with GameObject

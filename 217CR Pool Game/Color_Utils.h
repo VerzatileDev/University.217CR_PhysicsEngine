@@ -22,6 +22,7 @@ namespace Colors3f
 	const glm::vec3 Dark_Purple = glm::vec3(0.0f, 0.1f, 0.1f);
 	const glm::vec3 Dark_Gray = glm::vec3(0.1f, 0.1f, 0.1f);
 	const glm::vec3 Baby_Blue = glm::vec3(0.0f, 0.5f, 1.0f);
+	const glm::vec3 Magenta = glm::vec3(1.f, 0.f, 1.0f);
 }
 
 namespace Colors4f

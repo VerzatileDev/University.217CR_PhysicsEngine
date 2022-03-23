@@ -2,50 +2,61 @@
 
 void RigidBody2D::Draw()
 {
+	/* !!  ONly Use this For Testign Purposes  !!*/
 	glPushMatrix();
-	glTranslatef(position.x, position.y, position.z);
-	glRotatef(orientation, 0, 0, 1); //"angle,x,y,z (define as 0 or 1 ) 0 = means not affected on axis.
-	glColor3f(color.x,color.y,color.z);
 
-	glBegin(GL_QUADS);
-	glVertex3f(-length, height, width); //top left
-	glVertex3f(length, height, width); //top right
-	glVertex3f(length, -height, width); //bottom right
-	glVertex3f(-length, -height, width); //bottom left
-	glEnd();
-
+	glTranslatef(GameObject::position.x, GameObject::position.y, GameObject::position.z);
+	glRotatef(orientation, 0, 0, 1);	  //"angle,x,y,z (define as 0 or 1 ) 0 = means not affected on axis.
+	glColor3f(GameObject::color.x, GameObject::color.y, GameObject::color.z); // Color Defined In Main Initilization by GameObject
+	glBegin(GL_QUADS);                    // Draw a plane element from the represented 4 point.
+	glVertex3f(-length, height, width);	  //top left
+	glVertex3f(length, height, width);    //top right
+	glVertex3f(length, -height, width);   //bottom right
+	glVertex3f(-length, -height, width);  //bottom left
+	glEnd();							  // End the Initilization of Quad " Plane " Points
+	
+	
 	// Displays A Point on the Object making it easier to see rotation.
-	glPointSize(5.0f);
-	glColor3f(1.f, 0.f, 0.f);
-	glBegin(GL_POINTS);
-	glVertex3f(1, 0, 0); // Location of the Point relative to the object Position
-	glEnd();
+	Point::size = 5.0f;
+	Point::pointColor = Colors3f::Cyan;
+	Point::pointLocation = vector3(length, 0, 0);
+	Point::Draw();
+
 	glPopMatrix();
 
 	// Display Information here
-	GameObject::renderBitmapString(position.x - length, position.y, position.z, "  Position.x " + std::to_string(position.x));
-	GameObject::renderBitmapString(position.x - length, position.y - 0.3, position.z, "  Position.y " + std::to_string(position.y));
-	GameObject::renderBitmapString(position.x - length, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
-	GameObject::renderBitmapString(position.x - length, position.y - 0.9, position.z, "  AngularVelocity.x " + std::to_string(AngularVelocity.x));
-	GameObject::renderBitmapString(position.x - length, position.y - 1.2, position.z, "  LinearVelocity.x " + std::to_string(LinearVelocity.x));
-	GameObject::renderBitmapString(position.x - length, position.y - 1.5, position.z, "  orientation " + std::to_string(orientation));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y, GameObject::position.z, "  Position.x " + std::to_string(GameObject::position.x));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.3, GameObject::position.z, "  Position.y " + std::to_string(GameObject::position.y));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.6, GameObject::position.z, "  Position.z " + std::to_string(GameObject::position.z));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.9, GameObject::position.z, "  AngularVelocity.x " + std::to_string(AngularVelocity.x));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 1.2, GameObject::position.z, "  LinearVelocity.x " + std::to_string(LinearVelocity.x));
+	GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 1.5, GameObject::position.z, "  orientation " + std::to_string(orientation));
 
 }
 
 void RigidBody2D::Update(float deltaTime)
 {
+	std::cout << AngularInertia << std::endl;
 	CalculateForces();  // Linear (Euler method of calculation to find new position)
 	CalculateVelocity(deltaTime);
 	SetDisplacements(deltaTime);
 
-
+	// These Are Used For RigidBody Details When Applied to an Object.
+	ShowLinearVelocity = LinearVelocity;
+	ShowAngularVelocity = AngularVelocity; // <-- These Elements are Used in External Class such as Quad2D !!
 }
 
-RigidBody2D::RigidBody2D(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
+RigidBody2D::RigidBody2D(float mas, vector3 pos, vector3 col, int UsingRigidBody2D) : GameObject(mas, pos, col), Point()
 {
+	UsingRigidBody2DType = UsingRigidBody2D; // <-- Initialized Through Other Objects Generally if Non on Rigidbody2D itself is used it will not Draw Object !!
 	// Kilogram Force meter    Kg m squared = 9.8067 Newton Meters
 	// -- Currently Only Set to find inertia of a Rectangle -- //
 	FindInertia(length, height); //std::cout << AngularInertia << std::endl; //Debug
+}
+
+RigidBody2D::RigidBody2D()
+{
+	FindInertia(length, height); // <-- Circle Inertia Should be Seperate ! Remember to Change ! " Though it works still Better Practise"
 }
 
 RigidBody2D::~RigidBody2D()
@@ -61,8 +72,9 @@ void RigidBody2D::CalculateForces()
 	/* LINEAR SUM FORCES */
 
 	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in ANGULAR MOMENT / TORQUE !*/
-	LinearTotalForce += gravity * mass;
+	LinearTotalForce += gravity * GameObject::mass;
 	LinearTotalForce += AngularForceAffectingObject;
+	LinearTotalForce += KeyboardForce;
 
 
 	                 /* ANGULAR MOMENT / Torque */  
@@ -75,12 +87,13 @@ void RigidBody2D::CalculateForces()
 	// !! Each New Torque must include a position of the force being applied and the amount of Force applied !!
 	
 	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in Linear Motion (Force)*/
-	AngularTorque += (position + GravityPosition) * (gravity * mass);
-	AngularTorque += (position + AngularForceAffectingObjectPosition) * AngularForceAffectingObject; // NewTon meters
+	AngularTorque += (GameObject::position + GravityPosition) * (gravity * GameObject::mass);
+	AngularTorque += (GameObject::position + AngularForceAffectingObjectPosition) * AngularForceAffectingObject; // NewTon meters
+	AngularTorque += (GameObject::position + KeyboardForcePosition) * KeyboardForce;
 
 	
 	/* ACCELERATIONS */
-	LinearAcceleration = LinearTotalForce / mass; // A = Force / mass
+	LinearAcceleration = LinearTotalForce / GameObject::mass; // A = Force / mass
 	AngularAcceleration = AngularTorque / AngularInertia; // alpha (Acceleration) = Torque / Inertia  " In Newton meters
 }
 
@@ -100,13 +113,12 @@ void RigidBody2D::CalculateVelocity(float deltaTime)
 void RigidBody2D::SetDisplacements(float deltaTime)
 {
 	/* SET LINEAR MOTION DISPLACEMENT */
-	FuturePosition = position + (LinearVelocity)*deltaTime;
-	position = FuturePosition;
+	FuturePosition = GameObject::position + (LinearVelocity)*deltaTime;
+	GameObject::position = FuturePosition;
 
 	
 
-	if (orientation >= 360) orientation = 0; // When 360 degrees is reached Reset the Orientation back to 0.
-	//if (orientation < 0) orientation = 360;
+	if (orientation >= 360 || orientation <= -360) orientation = 0; // When 360 or -360 degrees is reached Reset the Orientation back to 0.
 	orientation = orientation + (AngularVelocity.x) * deltaTime; // Needs to Tetermine which side is more powerful either x axis force or y axis force and Translate it to orientation.
 
 
@@ -122,11 +134,33 @@ float RigidBody2D::SqrNumber(float Number)
 
 float RigidBody2D::FindInertia(float Length, float Height)
 {
-	// AngularInertia for 2d " 1/12 = 0.0833" -->   Logic ( 1/12 * m * (Length""2 + Height""2)     <-- For rectangle
-	float LengthHeightTotal = (SqrNumber(Length) + SqrNumber(Height));
-	AngularInertia = 0.0833 * mass * LengthHeightTotal;
-	AngularInertia *= 9.8067; // Conversion to Newton Meters.
+	
+	//< --For rectangle -->//  <-- Currently For non Uses same as Rectangle.
+	// AngularInertia for 2d " 1/12 = 0.0833" -->   Logic ( 1/12 * m * (Length""2 + Height""2)
+	if (UsingRigidBody2DType == 2) 
+	{
+		float LengthHeightTotal = (SqrNumber(Length) + SqrNumber(Height));
+		AngularInertia = 0.0833 * GameObject::mass * LengthHeightTotal;
+		AngularInertia *= 9.8067; // Conversion to Newton Meters.
+	}
+	
 
+	//<-- For Circle -->//
+	
+	//inertia = pi / radius""4 / 4
+	// or If with a diameter then :   Inertia = pi / Diameter""4 / 64 // WHere Diameter is 2 * Radius
+	if (UsingRigidBody2DType == 1)
+	{
+		AngularInertia = 3.14159; // Pi = 3.14159
+		float DiameterSqrSqr = (SqrNumber((SqrNumber(RigidBodyRadius))));
+		AngularInertia /= DiameterSqrSqr;
+		AngularInertia /= 4;
+	}
+
+	
+
+	// If object etc Hexagon, diamond, Polygon, Triangle
+	//std::cout << "I'm Called now" << std::endl;
 	return AngularInertia;
 }
 
