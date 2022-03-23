@@ -16,6 +16,7 @@
 #include "Quad2D.h"
 #include "RigidBody2D.h"
 #include "RigidBody3D.h"
+#include "Circle.h"
 
 
 class GameEngine

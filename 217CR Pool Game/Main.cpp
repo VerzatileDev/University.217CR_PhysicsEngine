@@ -23,8 +23,7 @@ GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, UserIn
 GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, UserInput::isFalse);
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse);
 
-
-//GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse, );
+GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Green);
 
 /* !!! If you want to See rigidBody in action Attach them to an Object Instead. !!!*/
 GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Orange, UsingRigidBody2D::rectangle); // Only Use this For Testing Purposes !!
@@ -41,17 +40,15 @@ int main(int argc, char** argv)
 
 	// Push Back Objects (Initialize)
 	//Engine.AddGameObject(particle);
-	Engine.AddGameObject(quad);
+	//Engine.AddGameObject(quad);
 	//Engine.AddGameObject(rigidbody2d);
-	Engine.AddGameObject(quad1);
+	//Engine.AddGameObject(quad1);
 	//Engine.AddGameObject(cube);
-	
+	Engine.AddGameObject(circle);
 	//Engine.AddGameObject(sphere);
 	//Engine.AddGameObject(sphere1);
 
 	//Engine.AddGameObject(rigidbody3d);
-
-
 
 	Engine.StartEngine();
 	return 0;
