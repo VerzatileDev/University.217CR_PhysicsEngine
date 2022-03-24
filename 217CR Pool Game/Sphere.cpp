@@ -39,6 +39,7 @@ void Sphere::Draw()
 	/* ! Note that Constructor Method will not work ! Update them Manually*/
 	// Update Positions Of the Collider / radius
 	SphereColliderPosition = GameObject::position;
+	SphereCollider::SphereColliderColor = glm::vec3(1.f, 0.f, 1.0f); // Magenta
 	SphereCollider::radius = radius;
 	SphereCollider::Draw();
 }

@@ -44,11 +44,11 @@ int main(int argc, char** argv)
 	//Engine.AddGameObject(rigidbody2d);
 	//Engine.AddGameObject(quad1);
 	//Engine.AddGameObject(cube);
-	Engine.AddGameObject(circle);
+	//Engine.AddGameObject(circle);
 	//Engine.AddGameObject(sphere);
 	//Engine.AddGameObject(sphere1);
 
-	//Engine.AddGameObject(rigidbody3d);
+	Engine.AddGameObject(rigidbody3d);
 
 	Engine.StartEngine();
 	return 0;

@@ -6,7 +6,7 @@ class RigidBody2D : public GameObject, public Point
 {
 private:
 	/* Linear Motion*/
-	// Mass & Position from GameObject
+	// Mass & Position from GameObject 
 	vector3 LinearAcceleration = vector3(0,0,0);
 	vector3 LinearVelocity = vector3(0, 0, 0);
 	vector3 FuturePosition = vector3(0, 0, 0);

@@ -69,7 +69,6 @@ void RigidBody2D::CalculateForces()
 
 
 	/* LINEAR SUM FORCES */
-
 	/*  ! ADD NEW FORCES HERE !  <-- Make sure the Force applied is also available in ANGULAR MOMENT / TORQUE !*/
 	LinearTotalForce += gravity * GameObject::mass;
 	LinearTotalForce += AngularForceAffectingObject;
