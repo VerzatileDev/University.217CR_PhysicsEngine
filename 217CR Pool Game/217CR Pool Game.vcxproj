@@ -171,6 +171,9 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereCollider.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="References.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

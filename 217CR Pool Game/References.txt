@@ -1,0 +1,255 @@
+
+" Welcome To References "
+
+--> Here you will find Local Variable References (Information) as well as some of the implementation
+--  doucmentation, which briefly explains the logic behind the functions as well as resources used.
+
+
+
+//////////////////////////////////////////////////////
+//          OpenGl functions / resources            //
+//////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////
+//         Local Files / Classes and Use            //
+//////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////
+//               Semi Implicit Euler                //
+//////////////////////////////////////////////////////
+
+
+Linear Euler Method of Motion, to calculate the new position
+of the object at hand.
+
+-------------------------------------------------------
+As the Law States The Object or a mass continues to move in 
+regards to space in a constant motion until a force acts on it.
+
+
+						<---- Code ---->
+						<-- Logic -->
+
+-> CalculateForces();
+
+-> Reset All Forces Acting on the Body " LinearTotalForce "
+-> Apply and Find the Net Sum Forces "LinearTotalForce"
+   such as : Gravity * mass, external Forces like KeyboardForce
+   and Forces that are Affecting the Motion of Angular Movement
+   which is represented as : " AngularForceAffectingObject".
+
+-> Acceleration = LinearTotalForce / mass;
+   Where LinearAcceleration equals the Net Force devided by mass
+   of the Object.
+   Formula : ( Acceleration = net-Force / mass )  A = F/m
+
+--> CalculateVelocity(deltaTime); // Where deltaTime References
+	time taken from previous frame to the current one.
+
+--> LinearVelocity = LinearVelocity + (LinearAcceleration) *deltaTime;
+
+	Formula : Vt + dt = Vt + (at) + dt;
+
+	------------
+	Where 
+	Vt +dt = NewVelocity
+	Vt = CurrentVelocity
+	at = current acceleration
+	dt = deltaTime
+	---------------
+
+--> SetDisplacement(deltaTime);
+	Where we find the displacement of the object in regards to the 
+	position in world space.
+
+	Linear Motion Displacement Formula :
+
+	FuturePosition = currentPosition + (currentlinearVelocity) *deltaTime;
+	" xt + dt = xt + (Vt) * dt "
+
+	---------
+	Where
+
+	xt + dt = Future Position
+	xt = current Position
+	Vt = current Velocity
+	dt = deltaTime  " In regards to time "
+	--------------
+
+--> Dampening
+	
+	" Idea of dampening is that we reduce the force being applied to the 
+	object in order for it to stop moving for ever, for this example try
+	only using the Keyboard disabling RigidBody Motion to see in action."
+
+	LinearVelocity *= pow(0.1, deltaTime);
+
+
+
+//////////////////////////////////////////////////////
+//               Angular Motion Euler               //
+//////////////////////////////////////////////////////
+
+Calculate the motion of orientation / Angle of the object
+in regards to world-Space.
+
+-------------------------------------------------------
+					<---- Code ---->
+					<-- Logic -->
+
+
+--> Find The Inertia "Selecting which Object is used Circle or
+					  a Quad (Plane)"
+
+--> Reset Forces Acting on the Object
+--> Find the Torque of the Object "Force applied "
+	
+	// Formula for Torque
+
+	/* ANGULAR MOMENT / Torque */  
+	// ------------------------------------------------------------------
+	// ----        Formula Torque = r * F * sin (Angle)              ----   
+	// ----  r = Distance between centre of mass and force applied.  ----
+	// ----             F = Force being applied                      ----
+	// ---- Sin angle = the angle that the force is being applied at ----
+	// ------------------------------------------------------------------
+
+!! Forces Affecting angular motion also have to affect the object's linearMotion !!
+
+
+--> AngularAcceleration = AngularTorque / AngularInertia  (Newton Meters) 
+	
+	formula Acceleration = force / mass // In the case of Angular we instead
+
+	Get alpha which is AngularAcceleration
+
+	AngularAcceleration = torque / Inertia.
+
+--> AngularVelocity += (AngularAcceleration) * deltaTime;
+
+--> Displacement !
+
+	orientation = orientation + (AngularVelocity.x) * deltaTime;
+
+--> Dampening 
+	
+	" Idea of dampening is that we reduce the force being applied to the 
+	object in order for it to stop moving for ever, for this example try
+	only using the Keyboard disabling RigidBody Motion to see in action."
+
+	AngularVelocity *= pow(0.1, deltaTime);
+
+
+// https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity 
+// https://www.youtube.com/watch?v=jg4e8W44_E4
+// https://www.youtube.com/watch?v=Ic_wFYu8xVs
+// https://www.britannica.com/science/inertia
+// https://ebookcentral.proquest.com/lib/coventry/reader.action?docID=1168822&ppg=1
+/* Resource used for Angular motion */
+
+
+
+
+
+//////////////////////////////////////////////////////
+//                 Velocity Varlet                  //
+//////////////////////////////////////////////////////
+
+Steps To Calculate Velocity Varlet :
+
+1) Half Step Velocity  - Calculated in order to further
+improve the accuarcy of the formula.
+
+2) Calculate the New Postion of the Object
+3) Derive Acceleration of the object
+4) Set New Velocity 
+5) Start over
+
+Improved Version for Game initialization we can remove
+" Half step Velocity " 
+  as this is not nessecary calculation for game Engines,
+  but rather mathematical or science related accuracies.
+
+Making the Calculation Steps as :
+
+1) Calcualte the New Position of the Object
+2) Find the Acceleration Derivitive
+3) Calculate New Velocity
+
+
+--------Where ----------
+1) xt + dt = xt + Vt * dt + 1/2 * at *dt""2
+2) at + dt = ForceAcceleration - OtherForceAcceleration;
+3) vt + dt = Vt + 1/2 * at + (at + dt) * dt;
+
+4) !! Set calculations to Old Values !!
+
+	Velocity = newVelocity
+	Acceleration = newAcceleration
+	Position = newPosition
+
+	" ! This is for the Next run calculations !"
+
+xt + dt = New Position
+xt = current Position
+dt = deltaTime
+at = current acceleration
+at + dt = new Acceleration
+Vt = current Velocity
+Vt + dt = New Velocity
+
+------------------------
+
+
+// https://gamedev.stackexchange.com/questions/33694/pros-and-cons-of-different-integrators 
+// http://kahrstrom.com/gamephysics/2011/08/03/euler-vs-verlet/
+// https://web.archive.org/web/20120713004111/http://wiki.vdrift.net:80/Numerical_Integration#Basic_Verlet.2FVelocity_Verlet
+// https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/06/MA221-6.1.pdf
+/* Resources used */
+
+//////////////////////////////////////////////////////
+//              Collision Dedection                 //
+//////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////
+//              Collision Response                  //
+//////////////////////////////////////////////////////
+
+
+
+/////////////////// NEWTON LAWS //////////////////////
+
+
+--------------------------------------------------------
+Newton Law 1
+
+A Body tends to Remain At Rest or Continue to Move in a 
+Straight line at constant Velocity Unless acted upon by
+an external force
+
+--------------------------------------------------------
+Newton Law 2
+
+The Acceleration of a body is proportional to the 
+resultant force acting on the body and this acceleration
+is in the same direction as the resultant Force
+
+--------------------------------------------------------
+Newton Law 3
+
+Fpr Every force acting on a body (Action) there is an 
+equal and opposite Reacting force (Reaction), where the 
+reaction is collinear to the Acting Foce.
+
+--------------------------------------------------------
