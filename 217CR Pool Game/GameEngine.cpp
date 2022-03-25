@@ -24,8 +24,8 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 	   Bit mask to select a window with a depth buffer.
 	*/
 
-	glutInitWindowSize(500, 500);		       // Set The Windows Initial Width and Height
-	glutInitWindowPosition(500, 200);          // Position Window Starting Top - Left Corner
+	glutInitWindowSize(1280, 720);		       // Width Height " Size Of the Window Displayed "
+	glutInitWindowPosition(200, 100);          // Location of the Window Being Displayed Starting From Top left Corner "
 	glutCreateWindow(windowTitle);			   // Establish a Window with A given Title.
 	glewExperimental = GL_TRUE;
 	glewInit();
