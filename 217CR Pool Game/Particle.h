@@ -6,6 +6,7 @@ class Particle : public GameObject, public Point
 {
 protected:
 	bool UserInput;
+	bool ShowDetails = false;
 	float radius = 0.9f;                          // Radius of the Particle " Hard Code "
 private:
 	/* Position & Mass From GameObject */
@@ -27,6 +28,6 @@ public:
 	void Draw();
 	void Update(float);
 	Particle();
-	Particle(float m, vector3 pos, vector3 col, bool KeyboardUse);
+	Particle(float m, vector3 pos, vector3 col, bool KeyboardUse, bool ShowingDetailsOnObject);
 	~Particle();
 };

@@ -6,10 +6,11 @@ class Quad2D : public GameObject, public RigidBody2D
 {
 private:
 	void CheckInput(float deltaTime);		// Get UserInput from the Keyboard if enabled by UserInput..
-	bool ShowDetails = false;
+	
 protected:
 	bool UserInput = false;					// <-- By Default False
 	int RigidBodyUsed = 0;					// <-- By Default False " 0 " Can be 0(non), 1(Circle) or 2(rectangle)
+	bool ShowDetails = false;
 	float angle = 0.0;						// Default Value of orientation / Angle of the rectangle
 	/* Rectangle Information 2D*/
 	float width = 0;						// on Z Axis

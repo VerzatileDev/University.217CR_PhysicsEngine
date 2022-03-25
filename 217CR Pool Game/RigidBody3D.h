@@ -21,12 +21,13 @@ private:
 protected:
 	float radius = 1.0f;
 	float orientation = 0.0;
+	int UsingRigidBody3DType = 3; // 3 Means No RigidBody Type is used !!
 public:
-	void Draw();										// Object Initilization and set of details
-	void Update(float);									// Object Updates Taking in deltaTime
-	RigidBody3D();										// Default Constructor Use when Nessecary to add to Other Objects..
-	RigidBody3D(float mas, vector3 pos, vector3 col);	// Constructor With GameObject
-	~RigidBody3D();										// Destructor
+	void Draw();															// Object Initilization and set of details
+	void Update(float);														// Object Updates Taking in deltaTime
+	RigidBody3D();															// Default Constructor Use when Nessecary to add to Other Objects..
+	RigidBody3D(float mas, vector3 pos, vector3 col, int UsingRigidBody3D);	// Constructor With GameObject
+	~RigidBody3D();															// Destructor
 
 	void CalculateForces();
 	// Return Values functions

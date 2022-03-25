@@ -50,9 +50,9 @@ void RigidBody3D::Update(float deltaTime)
 RigidBody3D::RigidBody3D()
 {}
 
-RigidBody3D::RigidBody3D(float mas, vector3 pos, vector3 col) : GameObject(mas, pos, col)
+RigidBody3D::RigidBody3D(float mas, vector3 pos, vector3 col, int UsingRigidBody3D) : GameObject(mas, pos, col)
 {
-	
+	UsingRigidBody3DType = UsingRigidBody3D; // Tells what type of RigidBody is used.
 }
 
 RigidBody3D::~RigidBody3D()

@@ -1,8 +1,8 @@
 #include "GameEngine.h"
 
 // Resource Files
-#include "Color_Utils.h" // Defines Usable color3f / color4f
-#include "Default_Utils.h" // For Odd Reasons, this Header File Cannot be Included anywhere else and Gives Errors, that everything inside is already defiend. 
+#include "Color_Utils.h"
+#include "Default_Utils.h"
 
 /* OBJECT DETAILS :
 MASS      default =  1.0f
@@ -17,18 +17,17 @@ True/False ShowDetails  " Lets us See information such as position of the object
 GameObject* quad = new Quad2D(1.0f, vector3(0, 0, 0), Colors3f::Dark_Blue, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse);
 GameObject* quad1 = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody2D::non, ShowDetails::isFalse);
 GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody2D::circle, ShowDetails::isFalse);
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
 
-
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse); // Default Linear Motion
-GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse);
-GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, UserInput::isFalse);
-GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, UserInput::isFalse);
-GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse);
+// 3D Objects That can use RigidBody3D Calculations
+GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isTrue);
+GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::Sphere, ShowDetails::isFalse);
+GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
+GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
 /* !!! If you want to See rigidBody in action Attach them to an Object Instead. !!!*/
 GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Orange, UsingRigidBody2D::rectangle); // Only Use this For Testing Purposes !!
-GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 0), Colors3f::Orange); // Only Use this For Testing Purposes !!
-
+GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 0), Colors3f::Orange, UsingRigidBody3D::Sphere); // Only Use this For Testing Purposes !!
 
 
 GameEngine Engine;

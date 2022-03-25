@@ -1,8 +1,9 @@
 #include "Particle.h"
 
-Particle::Particle(float mas, vector3 pos, vector3 col, bool KeyboardUse) : GameObject(mas, pos, col), Point()
+Particle::Particle(float mas, vector3 pos, vector3 col, bool KeyboardUse, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), Point()
 {
 	UserInput = KeyboardUse;
+	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
 }
 
 Particle::~Particle()
