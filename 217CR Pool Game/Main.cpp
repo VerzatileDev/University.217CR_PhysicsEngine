@@ -34,13 +34,13 @@ GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green, Use
 
 // 3D Objects That can use RigidBody3D Calculations
 GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isTrue);
-GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::Sphere, ShowDetails::isFalse);
+GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
 /* !!! If you want to See rigidBody in action Attach them to an Object Instead. !!!*/
 GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Orange, UsingRigidBody2D::rectangle); // Only Use this For Testing Purposes !!
-GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 25), Colors3f::Orange, UsingRigidBody3D::Sphere); // Only Use this For Testing Purposes !!
+GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 25), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
 
 
 GameEngine Engine;
@@ -69,7 +69,6 @@ int main(int argc, char** argv)
 	/* Rest of objects */
 
 	//Engine.AddGameObject(rigidbody2d);
-	//Engine.AddGameObject(quad1);
 	//Engine.AddGameObject(cube);
 	//Engine.AddGameObject(circle);
 	//Engine.AddGameObject(sphere);

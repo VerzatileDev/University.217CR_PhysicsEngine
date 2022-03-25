@@ -16,8 +16,8 @@ namespace UsingRigidBody2D
 namespace UsingRigidBody3D
 {
 	int non = 3; // Means that No RigidBody Inertia Is applied and No acting RigidBody will be applied.
-	int Sphere = 4;
-	int Plane = 5;
+	int HallowSphere = 4;
+	int SolidSphere = 5;
 	int Cube = 6;
 }
 

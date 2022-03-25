@@ -18,6 +18,9 @@ private:
 	// vector3 DragForce = vector3(0.0, 0.0, 0.0); 
 	// vector3 GravityAcceleration = vector3(0.0, 0.0, 0.0);
 
+	glm::mat4 Angularinertia = glm::mat4(1.0f);
+	float SqrNumber(float Number);
+
 protected:
 	float radius = 1.0f;
 	float orientation = 0.0;
@@ -29,6 +32,7 @@ public:
 	RigidBody3D(float mas, vector3 pos, vector3 col, int UsingRigidBody3D);	// Constructor With GameObject
 	~RigidBody3D();															// Destructor
 
+	glm::mat4 GetInertia(float Length, float Height, float width);
 	void CalculateForces();
 	// Return Values functions
 };
