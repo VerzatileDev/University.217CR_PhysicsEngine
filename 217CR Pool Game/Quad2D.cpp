@@ -23,11 +23,12 @@ void Quad2D::CheckInput(float deltaTime)
 Quad2D::Quad2D()
 {}
 
-Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
+Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject, glm::vec3 details) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
 {
 	UserInput = KeyboardUse;
 	RigidBodyUsed = UsingRigidBody2D;     // 0 non, 1 circle, 2 rectangle.
 	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
+	detail = details;
 }
 
 Quad2D::~Quad2D()
@@ -41,12 +42,12 @@ void Quad2D::Draw()
 	glTranslatef(GameObject::position.x, GameObject::position.y, GameObject::position.z);
 	glRotatef(angle, 0, 0, 1);			  //"angle,x,y,z (define as 0 or 1 ) 0 = means not affected on axis.
 	glColor3f(GameObject::color.x, GameObject::color.y, GameObject::color.z); // Color Defined In Main Initilization by GameObject
-	glBegin(GL_QUADS);                    // Draw a plane element from the represented 4 point.
-	glVertex3f(-length, height, width);	  //top left
-	glVertex3f(length, height, width);    //top right
-	glVertex3f(length, -height, width);   //bottom right
-	glVertex3f(-length, -height, width);  //bottom left
-	glEnd();							  // End the Initilization of Quad " Plane " Points
+	glBegin(GL_QUADS);							// Draw a plane element from the represented 4 point.
+	glVertex3f(-detail.x, detail.y, detail.z);	//top left
+	glVertex3f(detail.x, detail.y, detail.z);   //top right
+	glVertex3f(detail.x, -detail.y, detail.z);  //bottom right
+	glVertex3f(-detail.x, -detail.y, detail.z); //bottom left
+	glEnd();							        // End the Initilization of Quad " Plane " Points
 
 	if (ShowDetails) {
 		Point::size = 5.0f;

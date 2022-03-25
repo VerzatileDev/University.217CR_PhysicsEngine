@@ -128,6 +128,7 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 void GameEngine::DisplayScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.0, 0.0, 1.0, 0.0); // Set Background Color Dark Blue
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);// Position the objects for viewing.
 
