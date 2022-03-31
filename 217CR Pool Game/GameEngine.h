@@ -17,6 +17,7 @@
 #include "RigidBody2D.h"
 #include "RigidBody3D.h"
 #include "Circle.h"
+#include "SphereCollider.h"
 
 
 class GameEngine
@@ -25,7 +26,6 @@ private:
 	static std::vector<GameObject*> objects; // Store Objects to a vector list to be called and used.
 	static void UpdateGame(void); //Each thing needs to be static
 	static void DisplayScene(void); //Draw Game
-
 public:
 	static void InitEngine(int argc, char** argv, const char* windowTitle, int width, int height);
 	static void AddGameObject(GameObject* object);// Push back Object to Scene

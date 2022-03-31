@@ -18,4 +18,5 @@ public:
 	~Sphere();																										  // Destructor
 	void Draw();																								      // Object Drawn Details
 	void Update(float);																								  // Object Updates Taking in deltaTime
+
 };

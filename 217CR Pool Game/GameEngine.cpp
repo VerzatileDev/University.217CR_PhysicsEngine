@@ -149,21 +149,53 @@ void GameEngine::UpdateGame(void)
 	//std::cout << " --------------------------- " << std::endl;
 	//std::cout << "OldTimeSinceStart: " << oldTimeSinceStart << std::endl;
 	//std::cout << "NewTimeSinceStart: " << newTimeSinceStart << std::endl;
-
 	float deltaTime = (newTimeSinceStart - oldTimeSinceStart);
-
 	//std::cout << "Delta Time (ms): " << deltaTime << std::endl;
-
 	deltaTime /= 1000.f;
-
 	//std::cout << "Delta Time (seconds): " << deltaTime << std::endl;
 	//std::cout << " --------------------------- " << std::endl;
+
+
+
+
+	// -----------Collision Check here -----------
+	
+	// Get Object[i] and object[2]
+	// Send them to SphereCollider::CollisionCheck
+
+	// Get Returned Value
+	//GameObject* ptr = new Sphere();
+	//std::cout << ptr->position.y << std::endl; // Test
+
+	
+
+	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
+	{
+
+		glm::vec3 tempposition1 = objects[0]->position; // PLAYER object
+		glm::vec3 tempposition2 = objects[i]->position;
+
+		float tempRadius1 = objects[0]->radius; // Player Radius
+		float tempRadius2 = objects[i]->radius;
+
+		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
+		if (value == 1) std::cout << "SphereCollisioNCheck" << std::endl;
+		
+	}
+
+
+
+
 
 	// Updates objects position and details when defined within the class or enabled with initilization.
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		objects[i]->Update(deltaTime);
+		
 	}
+
+	//---------- If there was Collision DoCollision here..----
+
 
 	// Marks Window to be ReDisplayed <information at<https://www.opengl.org/resources/libraries/glut/spec3/node20.html>>
 	glutPostRedisplay();
