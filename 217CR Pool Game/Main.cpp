@@ -32,7 +32,7 @@ GameObject* tableEdgeRight = new Quad2D(1.0f, vector3(-12, 0, 5), Colors3f::Brow
 
 //GameObject* cue = new Quad2D(1.0f, vector3(0, 0, 5), Colors3f::White, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse, vector3(8, 0.2, 0)/* Size*/);
 
-GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isTrue, UsingRigidBody2D::circle, ShowDetails::isFalse);
+GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isTrue, UsingRigidBody2D::circle, ShowDetails::isFalse);
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
 
 // 3D Objects That can use RigidBody3D Calculations
@@ -40,7 +40,7 @@ GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::is
 GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
 
-GameObject* quad2d = new Quad2D(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isTrue, UsingRigidBody2D::rectangle, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
+GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserInput::isTrue, UsingRigidBody2D::rectangle, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
 
 
 
@@ -86,14 +86,18 @@ int main(int argc, char** argv)
 	//Engine.AddGameObject(cube);
 	//Engine.AddGameObject(rigidbody2d);
 	//Engine.AddGameObject(cube);
-	//Engine.AddGameObject(circle);
-	//Engine.AddGameObject(quad2d);
+	
+	
 
 	/* Collison Only works If only Spheres are in the Scene.  " MAKE A NEW VECTOR OBJECT for COLLISON OBJECT  SPHERE TO SPHERE COLLISION !!*/
 	Engine.AddGameObject(sphere);
 	Engine.AddGameObject(sphere1);
 	Engine.AddGameObject(sphere3);
 	Engine.AddGameObject(sphere4);
+
+	Engine.AddGameObject(quad2d);
+	Engine.AddGameObject(circle);
+
 
 	//std::cout << sphere->position.y << std::endl;
 

@@ -172,15 +172,18 @@ void GameEngine::UpdateGame(void)
 	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
 	{
 
-		glm::vec3 tempposition1 = objects[0]->position; // PLAYER object
+		glm::vec3 tempposition1 = objects[0]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
 		glm::vec3 tempposition2 = objects[i]->position;
 
 		float tempRadius1 = objects[0]->radius; // Player Radius
 		float tempRadius2 = objects[i]->radius;
 
 		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
-		if (value == 1) std::cout << "SphereCollisioNCheck" << std::endl;
-		
+		if (value == 1) std::cout << "Collision with" << " object Number "<< i << std::endl; // Debug
+
+		// If Collision Is happening change Color of the Object
+		if(value) objects[i]->color = Colors3f::Purple;
+		else if (value == 0) objects[i]->color = Colors3f::Green;
 	}
 
 

@@ -29,10 +29,8 @@ public:
 
 	vector3 position;
 	float radius = 1; // Hard Code because I don't know how to get SphereCollider one :D
-
-protected: // To be used within the class itself ( When The Class is Inherited on others)
-	
 	vector3 color;
+protected: // To be used within the class itself ( When The Class is Inherited on others)
 	float mass = 1.0f; // Set the Lowest Default Mass to be initialized with 1 if not Defined otherwise.
 	void renderBitmapString(float x, float y, float z, std::string str); // Display String Text Given to display with Position x / y  " displayed value "
 };
