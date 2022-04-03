@@ -14,6 +14,14 @@ GameObject::GameObject(float mas, vector3 pos, vector3 col) : Point()
 	mass = mas;
 }
 
+GameObject::GameObject(float mas, vector3 pos, vector3 col, float rad) : Point() // For Sphere Game Object :D
+{
+	position = pos;
+	color = col;
+	mass = mas;
+	radius = rad;
+}
+
 GameObject::~GameObject()
 {}
 

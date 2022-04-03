@@ -163,27 +163,33 @@ void GameEngine::UpdateGame(void)
 	// Get Object[i] and object[2]
 	// Send them to SphereCollider::CollisionCheck
 
-	// Get Returned Value
-	//GameObject* ptr = new Sphere();
-	//std::cout << ptr->position.y << std::endl; // Test
 
 	
 
 	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
 	{
-
+		/* Objects can Only access shared data from between object and gameobject class */
+		/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
 		glm::vec3 tempposition1 = objects[0]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
 		glm::vec3 tempposition2 = objects[i]->position;
 
-		float tempRadius1 = objects[0]->radius; // Player Radius
+		float tempRadius1 = objects[0]->radius;
 		float tempRadius2 = objects[i]->radius;
 
-		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
-		if (value == 1) std::cout << "Collision with" << " object Number "<< i << std::endl; // Debug
+		
 
-		// If Collision Is happening change Color of the Object
-		if(value) objects[i]->color = Colors3f::Purple;
-		else if (value == 0) objects[i]->color = Colors3f::Green;
+		std::cout << "Radius of object "<< i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
+
+		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
+		if (value == true)
+		{
+			std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
+			
+			objects[i]->color = Colors3f::Magenta; // Collision Detected
+		}
+		else objects[i]->color = Colors3f::Green; // No collision detected
+
+
 	}
 
 

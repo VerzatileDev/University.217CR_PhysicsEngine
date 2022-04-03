@@ -8,12 +8,12 @@ bool SphereCollider::CollisionCheck(glm::vec3 position, glm::vec3 position2, flo
 	
 	
 	// Pythagoras to calculate the distance between two objects.
-	float distance = sqrt((position.x - position2.x) * (position.x - position2.x) + (position.y - position2.y) * (position.y - position2.y) + (position.z - position2.z) * (position.z - position2.z));
+	float distance = (position.x - position2.x) * (position.x - position2.x) + (position.y - position2.y) * (position.y - position2.y) + (position.z - position2.z) * (position.z - position2.z);
 
 
 
-	if (distance > radii) collision = false;
-	if (distance <= radii) collision = true;
+	if (distance > radii * radii) collision = false;
+	if (distance <= radii * radii) collision = true;
 
 
 	//std::cout << collision << " its true ?" << std::endl;

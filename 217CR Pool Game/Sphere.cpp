@@ -19,7 +19,7 @@ void Sphere::CheckInput(float deltaTime)
 Sphere::Sphere()
 {}
 
-Sphere::Sphere(float mas, vector3 pos, vector3 col, bool KeyboardUse, int UsingRigidBody3D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), SphereCollider()
+Sphere::Sphere(float mas, vector3 pos, vector3 col, float rad, bool KeyboardUse, int UsingRigidBody3D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col, rad), SphereCollider()
 {
 	UserInput = KeyboardUse;
 	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.

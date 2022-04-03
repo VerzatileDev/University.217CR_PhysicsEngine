@@ -19,6 +19,7 @@ class GameObject : public Point
 public:
 	GameObject();
 	GameObject(float mas, vector3 pos, vector3 col);
+	GameObject(float mas, vector3 pos, vector3 col, float rad); // This is for Accessing radius from objects..
 	~GameObject();
 	virtual void Draw() = 0; // Must Return Void As function is inside other class objects.
 	virtual void Update(float); // Derived Classes that have no existing Update function, will use One defined here.
@@ -28,7 +29,7 @@ public:
 	static std::map<int, bool> NonACII_keyMap;
 
 	vector3 position;
-	float radius = 1; // Hard Code because I don't know how to get SphereCollider one :D
+	float radius = 1; // If no Existing Radius is found on Object Assigns One " Making A Sphere Collision unintentionally "
 	vector3 color;
 protected: // To be used within the class itself ( When The Class is Inherited on others)
 	float mass = 1.0f; // Set the Lowest Default Mass to be initialized with 1 if not Defined otherwise.

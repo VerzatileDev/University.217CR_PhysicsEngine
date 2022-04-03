@@ -23,12 +23,12 @@ void Quad2D::CheckInput(float deltaTime)
 Quad2D::Quad2D()
 {}
 
-Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject, glm::vec3 details) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
+Quad2D::Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject, glm::vec3 LengthHeightWidth) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
 {
 	UserInput = KeyboardUse;
 	RigidBodyUsed = UsingRigidBody2D;     // 0 non, 1 circle, 2 rectangle.
 	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
-	detail = details;
+	ObjectDimensions = LengthHeightWidth;
 }
 
 Quad2D::~Quad2D()
@@ -43,28 +43,28 @@ void Quad2D::Draw()
 	glRotatef(angle, 0, 0, 1);			  //"angle,x,y,z (define as 0 or 1 ) 0 = means not affected on axis.
 	glColor3f(GameObject::color.x, GameObject::color.y, GameObject::color.z); // Color Defined In Main Initilization by GameObject
 	glBegin(GL_QUADS);							// Draw a plane element from the represented 4 point.
-	glVertex3f(-detail.x, detail.y, detail.z);	//top left
-	glVertex3f(detail.x, detail.y, detail.z);   //top right
-	glVertex3f(detail.x, -detail.y, detail.z);  //bottom right
-	glVertex3f(-detail.x, -detail.y, detail.z); //bottom left
+	glVertex3f(-ObjectDimensions.x, ObjectDimensions.y, ObjectDimensions.z);	//top left
+	glVertex3f(ObjectDimensions.x, ObjectDimensions.y, ObjectDimensions.z);   //top right
+	glVertex3f(ObjectDimensions.x, -ObjectDimensions.y, ObjectDimensions.z);  //bottom right
+	glVertex3f(-ObjectDimensions.x, -ObjectDimensions.y, ObjectDimensions.z); //bottom left
 	glEnd();							        // End the Initilization of Quad " Plane " Points
 
 	if (ShowDetails) {
 		Point::size = 5.0f;
 		Point::pointColor = Colors3f::Cyan;
-		Point::pointLocation = vector3(length, 0, 0);
+		Point::pointLocation = vector3(ObjectDimensions.x, 0, 0);
 		Point::Draw();
 	}
 
 	glPopMatrix();                      // Pops the current matrix stack, replacing the current matrix with one below it on the stack..
 
 	if (ShowDetails) {
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y, GameObject::position.z, "  Position.x " + std::to_string(GameObject::position.x));
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.3, GameObject::position.z, "  Position.y " + std::to_string(GameObject::position.y));
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.6, GameObject::position.z, "  Position.z " + std::to_string(GameObject::position.z));
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 0.9, GameObject::position.z, "  AngularVelocity.x " + std::to_string(RigidBody2D::ShowAngularVelocity.x));
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 1.2, GameObject::position.z, "  LinearVelocity.x " + std::to_string(RigidBody2D::ShowLinearVelocity.x));
-		GameObject::renderBitmapString(GameObject::position.x - length, GameObject::position.y - 1.5, GameObject::position.z, "  orientation " + std::to_string(RigidBody2D::orientation));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y, GameObject::position.z, "  Position.x " + std::to_string(GameObject::position.x));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y - 0.3, GameObject::position.z, "  Position.y " + std::to_string(GameObject::position.y));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y - 0.6, GameObject::position.z, "  Position.z " + std::to_string(GameObject::position.z));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y - 0.9, GameObject::position.z, "  AngularVelocity.x " + std::to_string(RigidBody2D::ShowAngularVelocity.x));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y - 1.2, GameObject::position.z, "  LinearVelocity.x " + std::to_string(RigidBody2D::ShowLinearVelocity.x));
+		GameObject::renderBitmapString(GameObject::position.x - ObjectDimensions.x, GameObject::position.y - 1.5, GameObject::position.z, "  orientation " + std::to_string(RigidBody2D::orientation));
 	}
 	
 }

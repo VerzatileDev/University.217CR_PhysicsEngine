@@ -26,7 +26,7 @@ void Circle::Draw()
 	glTranslatef(GameObject::position.x, GameObject::position.y, GameObject::position.z); // Position / Location
 	glRotatef(angle, 0, 0, 1);															// Rotation of the Circle "Orientation"
 	int i, x, y;
-	double radius = 1.30;																// Size
+																						// Size
 	glColor3f(GameObject::color.x, GameObject::color.y, GameObject::color.z);			// Color
 	double twicePi = 2.0 * 3.142;														// Calculate Pi""2
 	x = 0, y = 0;
@@ -34,7 +34,7 @@ void Circle::Draw()
 	glVertex2f(x, y);																	// center location of circle
 	for (i = 0; i <= 20; i++) {															// i<= number  <-- Means the amount of triangles around the circle.
 		glVertex2f(
-			(x + (radius * cos(i * twicePi / 20))), (y + (radius * sin(i * twicePi / 20)))
+			(x + (GameObject::radius * cos(i * twicePi / 20))), (y + (GameObject::radius * sin(i * twicePi / 20)))
 		);
 	}
 	glEnd();																			// END Initializing Circle forming.
@@ -43,7 +43,7 @@ void Circle::Draw()
 	if (ShowDetails) {
 		Point::size = 5.0f;
 		Point::pointColor = Colors3f::Cyan;
-		Point::pointLocation = vector3(radius, 0, 0);
+		Point::pointLocation = vector3(GameObject::radius, 0, 0);
 		Point::Draw();
 	}
 
@@ -63,12 +63,12 @@ void Circle::Draw()
 	glPopMatrix();
 
 	if (ShowDetails) {
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y, GameObject::position.z, "  Position.x " + std::to_string(GameObject::position.x));
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y - 0.3, GameObject::position.z, "  Position.y " + std::to_string(GameObject::position.y));
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y - 0.6, GameObject::position.z, "  Position.z " + std::to_string(GameObject::position.z));
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y - 0.9, GameObject::position.z, "  AngularVelocity.x " + std::to_string(RigidBody2D::ShowAngularVelocity.x));
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y - 1.2, GameObject::position.z, "  LinearVelocity.x " + std::to_string(RigidBody2D::ShowLinearVelocity.x));
-		GameObject::renderBitmapString(GameObject::position.x - radius, GameObject::position.y - 1.5, GameObject::position.z, "  orientation " + std::to_string(RigidBody2D::orientation));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y, GameObject::position.z, "  Position.x " + std::to_string(GameObject::position.x));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y - 0.3, GameObject::position.z, "  Position.y " + std::to_string(GameObject::position.y));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y - 0.6, GameObject::position.z, "  Position.z " + std::to_string(GameObject::position.z));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y - 0.9, GameObject::position.z, "  AngularVelocity.x " + std::to_string(RigidBody2D::ShowAngularVelocity.x));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y - 1.2, GameObject::position.z, "  LinearVelocity.x " + std::to_string(RigidBody2D::ShowLinearVelocity.x));
+		GameObject::renderBitmapString(GameObject::position.x - GameObject::radius, GameObject::position.y - 1.5, GameObject::position.z, "  orientation " + std::to_string(RigidBody2D::orientation));
 	}
 
 }
@@ -76,7 +76,7 @@ void Circle::Draw()
 Circle::Circle()
 {}
 
-Circle::Circle(float mas, vector3 pos, vector3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), RigidBody2D(mas, pos, col, UsingRigidBody2D)
+Circle::Circle(float mas, vector3 pos, vector3 col, bool KeyboardUse, float rad ,int UsingRigidBody2D, bool ShowingDetailsOnObject) : GameObject(mas, pos, col, rad), RigidBody2D(mas, pos, col, UsingRigidBody2D)
 {
 
 	UserInput = KeyboardUse;

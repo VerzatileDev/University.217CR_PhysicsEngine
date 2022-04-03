@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABBCollider.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Color_Utils.h" />
     <ClInclude Include="Cone.h" />

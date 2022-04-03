@@ -13,13 +13,10 @@ protected:
 	bool ShowDetails = false;
 	float angle = 0.0;						// Default Value of orientation / Angle of the rectangle
 	/* Rectangle Information 2D*/
-	float width = 0;						// on Z Axis
-	float length = 1;						// on x Axis
-	float height = 1;						// on y Axis
-	vector3 detail = vector3(1,1,0);
+	vector3 ObjectDimensions = vector3(1,1,0); // Default Dimensions
 public:
 	Quad2D();								// Default Constructor Use when Nessecary to add to Other Objects..
-	Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject, glm::vec3 details); // Constructor using GameObject Details
+	Quad2D(float mas, glm::vec3 pos, glm::vec3 col, bool KeyboardUse, int UsingRigidBody2D, bool ShowingDetailsOnObject, glm::vec3 LengthHeightWidth); // Constructor using GameObject Details
 	~Quad2D();								// Destructor
 	void Draw();							// Object Initilization and set of details
 	void Update(float);						// Object Updates Taking in deltaTime
