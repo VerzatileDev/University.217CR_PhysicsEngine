@@ -122,6 +122,13 @@ void GameEngine::InitEngine(int argc, char** argv, const char* windowTitle, int 
 			delete objects[i];
 			std::cout << "Released Memory of object num: " << i + 1 << std::endl;
 		}
+
+		for (int i = 0; i < poolTable.size(); ++i)
+		{
+			delete poolTable[i];
+			std::cout << "Released Memory of Pool Table object num: " << i + 1 << std::endl;
+		}
+
 		std::cout << "\n! Reclaiming Memory Complete ! " << std::endl;
 	});
 }
@@ -168,60 +175,69 @@ void GameEngine::UpdateGame(void)
 
 	// -----------Collision Check here -----------
 	
-	
-	/* !! USE THIS FOR CHECKING an OBJECTS AGAINST ALL OTHER OBJECTS IN SCENE !!*/
+	const int whichcollisionused = 2;
 
-	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
+	if (whichcollisionused == 1) 
 	{
-		/* Objects can Only access shared data from between object and gameobject class */
-		/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
-		glm::vec3 tempposition1 = objects[0]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
-		glm::vec3 tempposition2 = objects[i]->position;
-
-		float tempRadius1 = objects[0]->radius;
-		float tempRadius2 = objects[i]->radius;
-
-		
-
-		//std::cout << "Radius of object "<< i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
-
-		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
-		if (value == true)
+		for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
 		{
-			//std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
-			
-			objects[i]->color = Colors3f::Magenta; // Collision Detected
+			/* Objects can Only access shared data from between object and gameobject class */
+			/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
+			glm::vec3 tempposition1 = objects[0]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
+			glm::vec3 tempposition2 = objects[i]->position;
+
+			float tempRadius1 = objects[0]->radius;
+			float tempRadius2 = objects[i]->radius;
+
+
+
+			//std::cout << "Radius of object "<< i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
+
+			bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
+			if (value == true)
+			{
+				//std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
+
+				objects[i]->color = Colors3f::Magenta; // Collision Detected
+			}
+			else objects[i]->color = Colors3f::Green; // No collision detected
+
+
 		}
-		else objects[i]->color = Colors3f::Green; // No collision detected
-
-
 	}
 
-	/* !! USE THIS FOR CHECKING ALL OBJECTS IN SCENE !!*/
+
+	/* !! USE THIS FOR CHECKING an OBJECTS AGAINST ALL OTHER OBJECTS IN SCENE !!*/
+
+	if (whichcollisionused == 2)
+	{
+		/* !! USE THIS FOR CHECKING ALL OBJECTS IN SCENE !!*/
+
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			for (unsigned int j = i + 1; j < objects.size(); j++)
+			{
+				/* Objects can Only access shared data from between object and gameobject class */
+				/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
+				glm::vec3 tempposition1 = objects[i]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
+				glm::vec3 tempposition2 = objects[j]->position;
+				float tempRadius1 = objects[i]->radius;
+				float tempRadius2 = objects[j]->radius;
+
+
+				//std::cout << "Radius of object " << i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
+				bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
+				if (value == true)
+				{
+					std::cout << "Collision" << std::endl; // Debug
+
+					objects[i]->color = Colors3f::Magenta; // Collision Detected
+				}
+				else objects[i]->color = Colors3f::Green; // No collision detected
+			}
+		}
+	}
 	
-	//for (unsigned int i = 0; i < objects.size(); i++)
-	//{
-	//	for (unsigned int j = i + 1; j < objects.size(); j++)
-	//	{
-		/* Objects can Only access shared data from between object and gameobject class */
-		/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
-	//	glm::vec3 tempposition1 = objects[i]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
-	//	glm::vec3 tempposition2 = objects[j]->position;
-	//	float tempRadius1 = objects[0]->radius;
-	//	float tempRadius2 = objects[i]->radius;
-
-
-	//	std::cout << "Radius of object " << i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
-	//	bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
-	//	if (value == true)
-	//	{
-	//		std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
-	//
-	//		objects[i]->color = Colors3f::Magenta; // Collision Detected
-	//	}
-	//	else objects[i]->color = Colors3f::Green; // No collision detected
-	//	}
-	//}
 
 
 

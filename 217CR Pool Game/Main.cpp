@@ -96,7 +96,6 @@ int main(int argc, char** argv)
 	Engine.AddGameObject(sphere1);
 	Engine.AddGameObject(sphere3);
 	Engine.AddGameObject(sphere4);
-
 	Engine.AddGameObject(quad2d);
 	Engine.AddGameObject(circle);
 
