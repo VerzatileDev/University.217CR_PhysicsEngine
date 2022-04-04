@@ -33,9 +33,7 @@ GameObject* tableEdgeRight = new Quad2D(1.0f, vector3(-12, 0, 5), Colors3f::Brow
 
 //GameObject* cue = new Quad2D(1.0f, vector3(0, 0, 5), Colors3f::White, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse, vector3(8, 0.2, 0)/* Size*/);
 
-//GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 0.5f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
-//GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserInput::isFalse, UsingRigidBody2D::non, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
-//GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 0.5f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+
 
 // 3D Objects That can use RigidBody3D Calculations
 //GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::Cube, ShowDetails::isTrue);
@@ -73,6 +71,10 @@ GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Oran
 GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 0), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
 
 
+GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 0.5f, UserInput::isFalse, UsingRigidBody2D::circle, ShowDetails::isFalse);
+GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::White, 0.5f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+
 
 GameEngine Engine;
 
@@ -82,7 +84,6 @@ int main(int argc, char** argv)
 	Engine.InitEngine(argc, argv, "9032499 Pool Game", 500, 500);
 
 	// Push Back Objects (Initialize)
-	//Engine.AddGameObject(particle);
 
 	/* Pool Table Initialization */
 	Engine.AddPoolTableObject(table);
@@ -98,8 +99,6 @@ int main(int argc, char** argv)
 	Engine.AddPoolTableObject(tableEdgeRight);
 
 	/* Rest of objects */
-	//Engine.AddGameObject(cube);
-	//Engine.AddGameObject(rigidbody2d);
 
 	/* Collison Only works If only Spheres are in the Scene.  " MAKE A NEW VECTOR OBJECT for COLLISON OBJECT  SPHERE TO SPHERE COLLISION !!*/
 	Engine.AddGameObject(player); // User BALL 
@@ -129,8 +128,11 @@ int main(int argc, char** argv)
 	// Row 5
 	Engine.AddGameObject(sphere15);
 
-	//Engine.AddGameObject(quad2d);
-	//Engine.AddGameObject(circle);
+	// Objects ShowCase
+	Engine.AddGameObject(quad2d);
+	Engine.AddGameObject(circle);
+	Engine.AddGameObject(particle);
+	
 
 	//Engine.AddGameObject(rigidbody3d);
 
