@@ -33,7 +33,7 @@ GameObject* tableEdgeRight = new Quad2D(1.0f, vector3(-12, 0, 5), Colors3f::Brow
 
 //GameObject* cue = new Quad2D(1.0f, vector3(0, 0, 5), Colors3f::White, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse, vector3(8, 0.2, 0)/* Size*/);
 
-GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 1.0f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
+GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 0.5f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
 
 
 // 3D Objects That can use RigidBody3D Calculations
@@ -47,11 +47,11 @@ GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserIn
 
 
 
-GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, 1, UserInput::isTrue, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, 1, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
+GameObject* sphere = new Sphere(1.0f, vector3(0, -1, 0), Colors3f::Green, 0.5f, UserInput::isTrue, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere1 = new Sphere(1.0f, vector3(0, 2, 0), Colors3f::Green, 0.5f, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
-GameObject* sphere3 = new Sphere(1.0f, vector3(0, 5, 0), Colors3f::Green, 1, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere4 = new Sphere(1.0f, vector3(2, 0, 0), Colors3f::Green, 1, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
+GameObject* sphere3 = new Sphere(1.0f, vector3(0, 5, 0), Colors3f::Green, 0.5f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere4 = new Sphere(1.0f, vector3(2, 0, 0), Colors3f::Green, 0.5f, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
 
 
@@ -60,7 +60,7 @@ GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Oran
 GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 0), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
 
 
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 1.0f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 0.5f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
 
 
 
@@ -75,24 +75,21 @@ int main(int argc, char** argv)
 	//Engine.AddGameObject(particle);
 
 	/* Pool Table Initialization */
-	//Engine.AddGameObject(table);
-	//Engine.AddGameObject(hole1);
-	//Engine.AddGameObject(hole2);
-	//Engine.AddGameObject(hole3);
-	//Engine.AddGameObject(hole4);
-	//Engine.AddGameObject(hole5);
-	//Engine.AddGameObject(hole6);
-	//Engine.AddGameObject(tableEdgeTop);
-	//Engine.AddGameObject(tableEdgeBottom);
-	//Engine.AddGameObject(tableEdgeLeft);
-	//Engine.AddGameObject(tableEdgeRight);
+	Engine.AddPoolTableObject(table);
+	Engine.AddPoolTableObject(hole1);
+	Engine.AddPoolTableObject(hole2);
+	Engine.AddPoolTableObject(hole3);
+	Engine.AddPoolTableObject(hole4);
+	Engine.AddPoolTableObject(hole5);
+	Engine.AddPoolTableObject(hole6);
+	Engine.AddPoolTableObject(tableEdgeTop);
+	Engine.AddPoolTableObject(tableEdgeBottom);
+	Engine.AddPoolTableObject(tableEdgeLeft);
+	Engine.AddPoolTableObject(tableEdgeRight);
 
 	/* Rest of objects */
 	//Engine.AddGameObject(cube);
 	//Engine.AddGameObject(rigidbody2d);
-	Engine.AddGameObject(cube);
-	
-	
 
 	/* Collison Only works If only Spheres are in the Scene.  " MAKE A NEW VECTOR OBJECT for COLLISON OBJECT  SPHERE TO SPHERE COLLISION !!*/
 	Engine.AddGameObject(sphere);
@@ -103,7 +100,7 @@ int main(int argc, char** argv)
 	Engine.AddGameObject(quad2d);
 	Engine.AddGameObject(circle);
 
-	Engine.AddGameObject(rigidbody3d);
+	//Engine.AddGameObject(rigidbody3d);
 
 	Engine.StartEngine();
 	return 0;

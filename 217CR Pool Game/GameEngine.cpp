@@ -1,5 +1,6 @@
 #include "GameEngine.h"
 std::vector<GameObject*> GameEngine::objects;
+std::vector<GameObject*> GameEngine::poolTable;
 static int oldTimeSinceStart;
 static int newTimeSinceStart;
 
@@ -132,6 +133,13 @@ void GameEngine::DisplayScene(void)
 	glLoadIdentity(); // Replaces Current matrix with Identity matrix < https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLoadIdentity.xml >
 	gluLookAt(0.0, 0.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);// Position the objects for viewing.
 
+
+	// DRAW PoolTable
+	for (int i = 0; i < poolTable.size(); ++i)
+	{
+		poolTable[i]->Draw();
+	}
+
 	// DRAW GAMEOBJECTS After Push Back
 	for (int i = 0; i < objects.size(); ++i)
 	{
@@ -235,4 +243,11 @@ void GameEngine::UpdateGame(void)
 void GameEngine::AddGameObject(GameObject* object)
 {
 	objects.push_back(object);
+}
+
+
+
+void GameEngine::AddPoolTableObject(GameObject* poolObject)
+{
+	poolTable.push_back(poolObject);
 }
