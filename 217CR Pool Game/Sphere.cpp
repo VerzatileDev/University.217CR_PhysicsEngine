@@ -51,7 +51,7 @@ void Sphere::Draw()
 	SphereColliderPosition = GameObject::position;
 	SphereCollider::SphereColliderColor = glm::vec3(1.f, 0.f, 1.0f); // Magenta
 	SphereCollider::radius = GameObject::radius;
-	SphereCollider::Draw();
+	//SphereCollider::Draw();
 
 
 

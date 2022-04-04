@@ -231,9 +231,9 @@ void GameEngine::UpdateGame(void)
 				{
 					std::cout << "Collision" << std::endl; // Debug
 
-					objects[i]->color = Colors3f::Magenta; // Collision Detected
+					//objects[i]->color = Colors3f::Magenta; // Collision Detected
 				}
-				else objects[i]->color = Colors3f::Green; // No collision detected
+				else continue; //objects[i]->color = Colors3f::Green; // No collision detected
 			}
 		}
 	}

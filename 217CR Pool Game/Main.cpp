@@ -33,38 +33,38 @@ GameObject* tableEdgeRight = new Quad2D(1.0f, vector3(-12, 0, 5), Colors3f::Brow
 
 //GameObject* cue = new Quad2D(1.0f, vector3(0, 0, 5), Colors3f::White, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse, vector3(8, 0.2, 0)/* Size*/);
 
-GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 0.5f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
-GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserInput::isFalse, UsingRigidBody2D::non, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 0.5f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+//GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 0.5f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
+//GameObject* quad2d = new Quad2D(1.0f, vector3(-2, 0, 0), Colors3f::Black, UserInput::isFalse, UsingRigidBody2D::non, ShowDetails::isTrue, vector3(0.6, 0.6, 0)/* Size*/);
+//GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 0.5f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
 
 // 3D Objects That can use RigidBody3D Calculations
-GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::Cube, ShowDetails::isTrue);
-GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
+//GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::Cube, ShowDetails::isTrue);
+//GameObject* cone = new Cone(1.0f, vector3(1, -1, 0), Colors3f::Green, UserInput::isFalse, UsingRigidBody3D::non, ShowDetails::isFalse);
 
 // Billiard Balls // 
-GameObject* player = new Sphere(1.0f, vector3(5, 0, 0), Colors3f::Green, 0.2f, UserInput::isTrue, UsingRigidBody3D::SolidSphere, ShowDetails::isTrue);
+GameObject* player = new Sphere(1.0f, vector3(5, 0, 0), Colors3f::White, 0.2f, UserInput::isTrue, UsingRigidBody3D::SolidSphere, ShowDetails::isTrue);
 
-GameObject* sphere1 = new Sphere(1.0f, vector3(-5, 2, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere2 = new Sphere(1.0f, vector3(-5, 1.5, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere3 = new Sphere(1.0f, vector3(-5, 1, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere1 = new Sphere(1.0f, vector3(-5, 2, 0), Colors3f::Red, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere2 = new Sphere(1.0f, vector3(-5, 1.5, 0), Colors3f::Blue, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere3 = new Sphere(1.0f, vector3(-5, 1, 0), Colors3f::Orange, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 GameObject* sphere4 = new Sphere(1.0f, vector3(-5, 0.5, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere5 = new Sphere(1.0f, vector3(-5, 0.0 , 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere5 = new Sphere(1.0f, vector3(-5, 0.0 , 0), Colors3f::Brown, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 
 
-GameObject* sphere6 = new Sphere(1.0f, vector3(-4.5, 1.7, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere7 = new Sphere(1.0f, vector3(-4.5, 1.2, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere8 = new Sphere(1.0f, vector3(-4.5, 0.7, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere9 = new Sphere(1.0f, vector3(-4.5, 0.2, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere6 = new Sphere(1.0f, vector3(-4.5, 1.7, 0), Colors3f::Bronze, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere7 = new Sphere(1.0f, vector3(-4.5, 1.2, 0), Colors3f::Black, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere8 = new Sphere(1.0f, vector3(-4.5, 0.7, 0), Colors3f::White, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere9 = new Sphere(1.0f, vector3(-4.5, 0.2, 0), Colors3f::Baby_Blue, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 
 
-GameObject* sphere10 = new Sphere(1.0f, vector3(-4, 1.5, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere11 = new Sphere(1.0f, vector3(-4, 0.9, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere12 = new Sphere(1.0f, vector3(-4, 0.4, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere10 = new Sphere(1.0f, vector3(-4, 1.5, 0), Colors3f::Dark_Purple, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere11 = new Sphere(1.0f, vector3(-4, 0.9, 0), Colors3f::Orange, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere12 = new Sphere(1.0f, vector3(-4, 0.4, 0), Colors3f::Dark_Gray, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 
-GameObject* sphere13 = new Sphere(1.0f, vector3(-3.5, 1.2, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
-GameObject* sphere14 = new Sphere(1.0f, vector3(-3.5, 0.6, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere13 = new Sphere(1.0f, vector3(-3.5, 1.2, 0), Colors3f::Dark_Blue , 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere14 = new Sphere(1.0f, vector3(-3.5, 0.6, 0), Colors3f::Red, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 
-GameObject* sphere15 = new Sphere(1.0f, vector3(-3, 0.8, 0), Colors3f::Green, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
+GameObject* sphere15 = new Sphere(1.0f, vector3(-3, 0.8, 0), Colors3f::Violet, 0.2f, UserInput::isFalse, UsingRigidBody3D::SolidSphere, ShowDetails::isFalse);
 
 
 
