@@ -178,12 +178,12 @@ void GameEngine::UpdateGame(void)
 
 		
 
-		std::cout << "Radius of object "<< i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
+		//std::cout << "Radius of object "<< i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
 
 		bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
 		if (value == true)
 		{
-			std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
+			//std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
 			
 			objects[i]->color = Colors3f::Magenta; // Collision Detected
 		}
