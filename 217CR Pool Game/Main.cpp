@@ -56,7 +56,7 @@ GameObject* sphere4 = new Sphere(1.0f, vector3(2, 0, 0), Colors3f::Green, 1, Use
 
 /* !!! If you want to See rigidBody in action Attach them to an Object Instead. !!!*/
 GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Orange, UsingRigidBody2D::rectangle); // Only Use this For Testing Purposes !!
-GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 25), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
+GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 0), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
 
 
 GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 1.0f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
@@ -71,7 +71,7 @@ int main(int argc, char** argv)
 	Engine.InitEngine(argc, argv, "9032499 Pool Game", 500, 500);
 
 	// Push Back Objects (Initialize)
-	Engine.AddGameObject(particle);
+	//Engine.AddGameObject(particle);
 
 	/* Pool Table Initialization */
 	//Engine.AddGameObject(table);
@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 	
 
 	/* Collison Only works If only Spheres are in the Scene.  " MAKE A NEW VECTOR OBJECT for COLLISON OBJECT  SPHERE TO SPHERE COLLISION !!*/
-	Engine.AddGameObject(sphere);
+	//Engine.AddGameObject(sphere);
 	//Engine.AddGameObject(sphere1);
 	//Engine.AddGameObject(sphere3);
 	//Engine.AddGameObject(sphere4);
@@ -102,7 +102,7 @@ int main(int argc, char** argv)
 	//Engine.AddGameObject(quad2d);
 	//Engine.AddGameObject(circle);
 
-	//Engine.AddGameObject(rigidbody3d);
+	Engine.AddGameObject(rigidbody3d);
 
 	Engine.StartEngine();
 	return 0;
