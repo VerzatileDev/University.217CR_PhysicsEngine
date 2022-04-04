@@ -8,6 +8,7 @@
 MASS      default =  1.0f
 POSITION  default = vector3(0, 0, 0)
 COLOR     default = vector3(1.0f, 2.0f, 1.0f) -> " White " / see Color_Utils for more
+Radius    If Defined Uses Float = 1.0f; On Default by GameObject
 True/False UserInput    " Enables The Use of a Keyboard For the User Object "// See more on Default_Utils
 True/False RigidBody2D  " Adds Forces And calcualtions for Positions as well as Angular Motion // More At Default_Utils
 True/False ShowDetails  " Lets us See information such as position of the object etc "  // More At Default_Utils
@@ -89,18 +90,18 @@ int main(int argc, char** argv)
 	/* Rest of objects */
 	//Engine.AddGameObject(cube);
 	//Engine.AddGameObject(rigidbody2d);
-	//Engine.AddGameObject(cube);
+	Engine.AddGameObject(cube);
 	
 	
 
 	/* Collison Only works If only Spheres are in the Scene.  " MAKE A NEW VECTOR OBJECT for COLLISON OBJECT  SPHERE TO SPHERE COLLISION !!*/
-	//Engine.AddGameObject(sphere);
-	//Engine.AddGameObject(sphere1);
-	//Engine.AddGameObject(sphere3);
-	//Engine.AddGameObject(sphere4);
+	Engine.AddGameObject(sphere);
+	Engine.AddGameObject(sphere1);
+	Engine.AddGameObject(sphere3);
+	Engine.AddGameObject(sphere4);
 
-	//Engine.AddGameObject(quad2d);
-	//Engine.AddGameObject(circle);
+	Engine.AddGameObject(quad2d);
+	Engine.AddGameObject(circle);
 
 	Engine.AddGameObject(rigidbody3d);
 
