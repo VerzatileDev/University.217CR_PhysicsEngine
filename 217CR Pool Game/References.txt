@@ -10,15 +10,55 @@
 //          OpenGl functions / resources            //
 //////////////////////////////////////////////////////
 
+/* RESOURCES USED GENERALLY */
+
+// https://www.tutorialspoint.com/cplusplus/cpp_classes_objects.htm C++ Classes and Objects
+// https://upcommons.upc.edu/bitstream/handle/2117/184377/24006066.pdf Effect of the integration scheme on the rotation of non-spherical particles with the Discrete Element Method.
+// http://hyperphysics.phy-astr.gsu.edu/hbase/amom.html Angular and Linear Momentum / Angular Momentum / Angular Momentum of a Particle Example Formula Logic
+// https://stackoverflow.com/questions/22444450/drawing-circle-with-opengl Draw Circle with OpenGl
+// https://stackoverflow.com/questions/12229329/drawing-bigger-text-using-glutbitmapcharacters Draw bigger Text with GlutBitmapCharacters
+// http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/ Matrices Tutorial for OpenGl
+
+
+// Inertia
+// https://www.vedantu.com/iit-jee/moment-of-inertia-of-a-circle Moment of Inertia of a Circle
+// https://medium.com/@ankusharya2526/difference-between-inertia-and-moment-of-inertia-moi-bb87af575b2a Difference between Inertia and moment of Inertia ( MOI)…
+
+// Integrators
+// https://web.archive.org/web/20120713004111/http://wiki.vdrift.net:80/Numerical_Integration#Basic_Verlet.2FVelocity_Verlet Numerical Integration "Basic Varlet/ Velocity Varlet"
+// https://gafferongames.com/post/integration_basics/ Integration Basics
+// http://kahrstrom.com/gamephysics/2011/08/03/euler-vs-verlet/ Euler vs Varlet
+// https://farside.ph.utexas.edu/teaching/329/lectures/node35.html Runge Kutta Method Formula Walkthrough
+// https://gamedev.stackexchange.com/questions/33694/pros-and-cons-of-different-integrators Pros and Cons Of RK4 and Varlet Integrator
+// https://i.gyazo.com/e332f905ddb4c3bbb29667c77395d565.png 4th Order Runge Kutta Integrator " Decided that it is not nessecary to find 4 Steps into the Future for an object"
+// https://www.researchgate.net/publication/268034494_Fast_and_accurate_symmetric_Euler_algorithm_for_electromechanical_simulations_NOTE_The_method_became_later_known_as_Symplectic_Euler
+// Fast and accurate symmetric Euler algorithm Paper / Introduction
+
 
 
 //////////////////////////////////////////////////////
 //         Local Files / Classes and Use            //
 //////////////////////////////////////////////////////
 
+NameSpace Files :
+	Color_Utils.h
+	Default_Utils.h
 
+ReUsable Objects :
+	Circle
+	Cone
+	Cube
+	Particle
+	Quad2D
+	Sphere
+	"For Testing Purposes RigidBody2d, RigidBody3d"
+	----- Both RigidBodies can be applied to Objects to Recive Motion !----
 
+Detail Objects :
+	Point - " Point is used to See Objects Rotation More Clearly By enabling Details "
 
+References :
+	References.txt - " Here you Will Find Explanations of each element Formulas and References to make these Formulas."
 
 
 
@@ -93,6 +133,17 @@ regards to space in a constant motion until a force acts on it.
 
 	LinearVelocity *= pow(0.1, deltaTime);
 
+// Resources Used " References : "
+
+// https://en-academic.com/dic.nsf/enwiki/5232688 Semi Implicit Euler Method
+// https://www.hindawi.com/journals/mpe/2014/460530/ Analysis of Semi Implicit Euler
+// https://www.youtube.com/watch?v=as2-wEYgxl4 Implicit Euler Method System of ODE with initial values
+// https://www.youtube.com/watch?v=QclONujA5BM 7.2.5-ODEs: Implicit Euler's Method
+// https://www.freecodecamp.org/news/eulers-method-explained-with-examples/ Euler Methods Explained
+// https://x-engineer.org/euler-integration/ Euler Integration Engineering Paper
+// https://pythonnumericalmethods.berkeley.edu/notebooks/chapter22.03-The-Euler-Method.html Python Example On Euler Method
+// https://www.pnw.edu/wp-content/uploads/2020/03/Lecture-Notes-10-5.pdf Euler's Method " Lecture Notes"
+
 
 
 //////////////////////////////////////////////////////
@@ -149,12 +200,17 @@ in regards to world-Space.
 	AngularVelocity *= pow(0.1, deltaTime);
 
 
+/* Resource used for Angular motion  " References : " */
+
 // https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity 
 // https://www.youtube.com/watch?v=jg4e8W44_E4
-// https://www.youtube.com/watch?v=Ic_wFYu8xVs
+// https://www.youtube.com/watch?v=Ic_wFYu8xVs  // Dublicate Used For Finding Inertia video
 // https://www.britannica.com/science/inertia
 // https://ebookcentral.proquest.com/lib/coventry/reader.action?docID=1168822&ppg=1
-/* Resource used for Angular motion */
+// https://www.khanacademy.org/science/in-in-class11th-physics/in-in-class11th-physics-motion-in-a-plane/uniform-circular-motion-introduction/v/angular-velocity-and-speed
+// https://theeducationlife.com/angular-velocity-formula/
+// https://www.youtube.com/watch?v=kYwov4OwY2Y
+// http://eecs.qmul.ac.uk/~gslabaugh/publications/euler.pdf
 
 
 
@@ -209,22 +265,88 @@ Vt + dt = New Velocity
 
 ------------------------
 
+/* Resources used " References : " */
 
-// https://gamedev.stackexchange.com/questions/33694/pros-and-cons-of-different-integrators 
-// http://kahrstrom.com/gamephysics/2011/08/03/euler-vs-verlet/
-// https://web.archive.org/web/20120713004111/http://wiki.vdrift.net:80/Numerical_Integration#Basic_Verlet.2FVelocity_Verlet
-// https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/06/MA221-6.1.pdf
-/* Resources used */
+
+// http://kahrstrom.com/gamephysics/2011/08/03/euler-vs-verlet/ Euler vs Verlet
+// https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/06/MA221-6.1.pdf Varlet Inegration
+// https://physics.stackexchange.com/questions/256423/verlet-integration-with-translation-and-rotation-in-2d Verlet integration with translation and rotation in 2D
+// https://cnx.org/contents/MymQBhVV@175.14:51fg7QFb@14/Angular-velocity 5.4.1.1 Angular velocity
+// https://ubm-twvideo01.s3.amazonaws.com/o1/vault/gdc04/slides/using_verlet_integration.pdf
+// http://lab.pdebuyl.be/rmpcdmd/algorithms/quaternions.html Quaternions " Rotation for 3d Objects "
+// https://www.researchgate.net/publication/46422891_Robust_rotational-velocity-Verlet_integration_methods Robust rotational-velocity-Verlet integration methods
+// https://www.wikiwand.com/en/Verlet_integration#/Algorithmic_representation Velocity Verlet Repressentation With Formula
+// https://python.plainenglish.io/molecular-dynamics-velocity-verlet-integration-with-python-5ae66b63a8fd
+// https://www.youtube.com/watch?v=qT8pxV53FA4 L-4 | Velocity Verlet Algorithm - Solving equations of motion | Molecular Dynamics
+// https://wright.nasa.gov/airplane/drageq.html Modern Drag Equation by Nasa
+// https://www.physicsforums.com/threads/velocity-verlet-c-implementation.921363/ Velocity Varlet Implementation " Approach not used " 
+// http://www.videotutorialsrock.com/opengl_tutorial/collision_detection/home.php Collision Detection Source Code
+//
+
 
 //////////////////////////////////////////////////////
 //              Collision Dedection                 //
 //////////////////////////////////////////////////////
 
 
+In Sphere to Sphere Collision We Require to get :
+
+Object1 Position;
+Object2 Position;
+Object1 Radius; 
+Object2 Radius;
+
+// WE Reset Collision To False
+bool collision = false;
+
+// We then Find the Sum Of Both Radiuses of the Object 1 and 2
+Float Radii = Object1 Radius + Object2 Radius;
+
+// We THen use Pythagoras To calculate the Distance between the two Objects Using A vector 3 Space x, y, z axis
+float distance = (position.x - position2.x) * (position.x - position2.x) + (position.y - position2.y) * (position.y - position2.y) + (position.z - position2.z) * (position.z - position2.z);
+
+/* Note that we Do not Square The Distance to avoid Unnesecary Calculations and Power Drawing for the Cpu */
+// For this We need to Multiply  Radii with itself
+
+Radii * Radii;
+
+// When we Know the Sum Total Of Radii And Distance between two Objects
+if ( distance > Radii)
+{
+
+	// WE Set Collision To False As Distance is not less than 2 Objects Radius total
+	collision = false;
+}
+if( Distance <= Radii) collision = true;
+
+
+// When we have Recived A Response of the Collision value we can move on Modifying Values
+// Such as the Color to see Collision in the Game Scene between Objects.
+
+
+/* To Initialize Collision Detection We have to Loop through A nested For Loop , which Gives a Chance to Check Every Object In the Scene Against
+Every other Object, for theory it should also Check Each objects Type To initialize Which Collision Detection Formula and Function is used
+Such as AABBCollider / SphereCollider  " Sphere on Sphere " / Cube with Sphere /  Cube with Cube*/
+
+
+
+// http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Christer_Ericson-Real-Time_Collision_Detection-EN.pdf  AABB Recomputed from Rotated AABB
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection 3D Collision Detection walkthrough
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection 2D Collision Detection walkthrough
+// https://www.youtube.com/watch?v=Lg0kOoiCI80 OpenGL Tutorial #10 - Collision Detection
+// https://www.youtube.com/watch?v=L7CApjPVP7c Pythagorean Theorem / Distance Finding with Math
+// https://www.youtube.com/watch?v=NZHzgXFKfuY Collision Detection Walkthrough
+// https://gamedev.stackexchange.com/questions/60505/how-to-check-for-cube-collisions Cube collision Check walkthrough
+// https://github.com/michaelg29/yt-tutorials/blob/master/CPP/OpenGL/Collision%20Walkthrough.pdf A tutorial Formula Walkthrough for Collision Detection
+
 
 //////////////////////////////////////////////////////
 //              Collision Response                  //
 //////////////////////////////////////////////////////
+
+
+
+
 
 
 

@@ -160,10 +160,7 @@ void GameEngine::UpdateGame(void)
 
 	// -----------Collision Check here -----------
 	
-	// Get Object[i] and object[2]
-	// Send them to SphereCollider::CollisionCheck
-
-
+	
 	/* !! USE THIS FOR CHECKING an OBJECTS AGAINST ALL OTHER OBJECTS IN SCENE !!*/
 
 	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
@@ -206,9 +203,7 @@ void GameEngine::UpdateGame(void)
 	//	float tempRadius2 = objects[i]->radius;
 
 
-
 	//	std::cout << "Radius of object " << i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
-
 	//	bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
 	//	if (value == true)
 	//	{
