@@ -7,7 +7,7 @@ class Sphere : public GameObject, public SphereCollider
 private:
 	
 protected:
-	float radius = 1.0f; // Default Radius
+	
 	bool UserInput = false;
 	bool ShowDetails = false;
 	int RigidBodyUsed = 0;
@@ -18,5 +18,5 @@ public:
 	~Sphere();																										  // Destructor
 	void Draw();																								      // Object Drawn Details
 	void Update(float);																								  // Object Updates Taking in deltaTime
-
+	float radius = 1.0f; // Default Radius
 };

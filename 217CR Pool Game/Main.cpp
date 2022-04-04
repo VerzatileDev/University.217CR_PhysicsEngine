@@ -32,8 +32,8 @@ GameObject* tableEdgeRight = new Quad2D(1.0f, vector3(-12, 0, 5), Colors3f::Brow
 
 //GameObject* cue = new Quad2D(1.0f, vector3(0, 0, 5), Colors3f::White, UserInput::isFalse, UsingRigidBody2D::rectangle, ShowDetails::isFalse, vector3(8, 0.2, 0)/* Size*/);
 
-GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, 1 ,UsingRigidBody2D::circle, ShowDetails::isFalse);
-GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Green, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+GameObject* circle = new Circle(1.0f, vector3(0, 0, 0), Colors3f::Red, 1.0f ,UserInput::isFalse,UsingRigidBody2D::circle, ShowDetails::isFalse);
+
 
 // 3D Objects That can use RigidBody3D Calculations
 GameObject* cube = new Cube(1.0f, vector3(0, 0, 0), Colors3f::Red, UserInput::isFalse, UsingRigidBody3D::Cube, ShowDetails::isTrue);
@@ -59,6 +59,10 @@ GameObject* rigidbody2d = new RigidBody2D(1.0f, vector3(2, 0, 0), Colors3f::Oran
 GameObject* rigidbody3d = new RigidBody3D(1.0f, vector3(0, 0, 25), Colors3f::Orange, UsingRigidBody3D::SolidSphere); // Only Use this For Testing Purposes !!
 
 
+GameObject* particle = new Particle(1.0f, vector3(0, 0, 0), Colors3f::Black, 1.0f, UserInput::isFalse, ShowDetails::isFalse); // Default Linear Motion
+
+
+
 GameEngine Engine;
 
 /* GLUT runs a Console Application Beginning from Main()*/
@@ -67,7 +71,7 @@ int main(int argc, char** argv)
 	Engine.InitEngine(argc, argv, "9032499 Pool Game", 500, 500);
 
 	// Push Back Objects (Initialize)
-	//Engine.AddGameObject(particle);
+	Engine.AddGameObject(particle);
 
 	/* Pool Table Initialization */
 	//Engine.AddGameObject(table);
@@ -96,7 +100,7 @@ int main(int argc, char** argv)
 	//Engine.AddGameObject(sphere4);
 
 	//Engine.AddGameObject(quad2d);
-	Engine.AddGameObject(circle);
+	//Engine.AddGameObject(circle);
 
 	//Engine.AddGameObject(rigidbody3d);
 

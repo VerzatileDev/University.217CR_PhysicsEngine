@@ -1,20 +1,29 @@
 #include "Particle.h"
 
-Particle::Particle(float mas, vector3 pos, vector3 col, bool KeyboardUse, bool ShowingDetailsOnObject) : GameObject(mas, pos, col), Point()
-{
-	UserInput = KeyboardUse;
-	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
-}
+
 
 Particle::~Particle()
 {}
 
 void Particle::Draw()
 {
-	glPushMatrix();
-	glColor3f(color.x, color.y, color.z);
-	glTranslatef(position.x, position.y, position.z);
-	glutSolidSphere(radius, 20, 20);
+	glPushMatrix();																		  // Defines that new element is being used
+	glTranslatef(GameObject::position.x, GameObject::position.y, GameObject::position.z); // Position / Location
+	//glRotatef(angle, 0, 0, 1);															// Rotation of the Circle "Orientation"
+	int i, x, y;
+	// Size
+	glColor3f(GameObject::color.x, GameObject::color.y, GameObject::color.z);			// Color
+	double twicePi = 2.0 * 3.142;														// Calculate Pi""2
+	x = 0, y = 0;
+	glBegin(GL_TRIANGLE_FAN);															// BEGIN CIRCLE Initialization
+	glVertex2f(x, y);																	// center location of circle
+	for (i = 0; i <= 20; i++) {															// i<= number  <-- Means the amount of triangles around the circle.
+		glVertex2f(
+			(x + (GameObject::radius * cos(i * twicePi / 20))), (y + (GameObject::radius * sin(i * twicePi / 20)))
+		);
+	}
+	glEnd();												 
+	
 	
 	// Displays A Point on the Object making it easier to see rotation. " See Point class for more Information !"
 	Point::size = 5.0f;
@@ -26,70 +35,86 @@ void Particle::Draw()
 
 	// Position.x - r states here the text displayed from radius of the object
 	// Position.y + 0.3 states the Row for text displayed
-	GameObject::renderBitmapString(position.x - radius, position.y, position.z, "  Position.x " + std::to_string(position.x));
-	GameObject::renderBitmapString(position.x - radius, position.y - 0.3 , position.z, "  Position.y " + std::to_string(position.y));
-	GameObject::renderBitmapString(position.x - radius, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
-	GameObject::renderBitmapString(position.x - radius, position.y - 0.9, position.z, "  LinearForce.x " + std::to_string(LinearTotalForce.x));
-	GameObject::renderBitmapString(position.x - radius, position.y - 1.2, position.z, "  LinearVelocity.x " + std::to_string(LinearVelocity.x));
+	//GameObject::renderBitmapString(position.x - radius, position.y, position.z, "  Position.x " + std::to_string(position.x));
+	//GameObject::renderBitmapString(position.x - radius, position.y - 0.3 , position.z, "  Position.y " + std::to_string(position.y));
+	//GameObject::renderBitmapString(position.x - radius, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
+	
 }
 
 void Particle::Update(float deltaTime)
 {
 	if(UserInput) CheckForKeyboard(deltaTime);  /* Keyboard Force User Applied.*/
-	CalculateForces();							// Find Forces Being applied to the Object
-	CalculateVelocity(deltaTime);				// Find the displacement of the acceleration.
-	SetDisplacements(deltaTime);				// Find the New Position of the Object After Forces being applied.
+
+	// For 2D basis https://www.gamedev.net/tutorials/programming/math-and-physics/a-verlet-based-approach-for-2d-game-physics-r2714/
+
+	// Resource for Velocity Varlet Integration for 3D basis.
+	// https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/06/MA221-6.1.pdf //
+	/*    Velocity Varlet       */
+	// Half Step Velocity		1)
+	// Calcualte New Position   2)
+	// Derive Acceleration      3)
+	// newVelocity = Half Step Velocity + newAcceleration Recived from 3)
+	/* Where Acceleration and Velocity is used for the next run.*/
+
+	// newPosition = oldPosition + oldVelocity * DeltaTime + 0.5 <--"(1/2)" * oldacceleration * deltaTime""2 // FutureTime "Approximate"
+	vector3 newPosition = GameObject::position + VarletVelocity * deltaTime + 0.5f * VarletAcceleration * deltaTime * deltaTime;
+
+	// dragForce - Where we calculate the force against the acceleration or per say Position Change of the Object.
+	// dragAcceleration = force / mass   // a = f/m
+	// newAcceleration = GravityAcceleration - dragAcceleration
+	CalculateForces();
+
+	// newVelocity = oldvelocity + 0.5 * oldAcceleration + newAcceleration * Time;
+	vector3 newVelocity = VarletVelocity + 0.5f * (VarletAcceleration + NewAcceleration) * deltaTime;
+
+	// Set new Calculations to old values;
+	VarletAcceleration = NewAcceleration;
+	VarletVelocity = newVelocity;
+
+	// Set The new Profound Position = furtureposition;
+	GameObject::position = newPosition;
+	
 }
 
-Particle::Particle()
-{}
+Particle::Particle(float mas, vector3 pos, vector3 col, float rad, bool KeyboardUse, bool ShowingDetailsOnObject) : GameObject(mas, pos, col, rad)
+{
+	UserInput = KeyboardUse;
+	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
+	//radius = rad;
+}
+
 
 void Particle::CalculateForces()
 {
-	LinearTotalForce = vector3(0, 0, 0); // Reset Force
-	LinearTotalForce += gravity * mass;
-	LinearTotalForce += wind;
-	LinearTotalForce += keyboardForce; // std::cout << keyboardForce.y << std::endl;// Debug
-	
-	/* ACCELERATION */
-	LinearAcceleration = LinearTotalForce / mass; // acceleration = Force/ mass
-
-	// Developer Comments "  
-	//1. In case the Mass were to change, for example some type of impact is the reason to Use *mass and then  /m to get the difference.
-	//2. Forces affecting the Object * It is best that each new force is applied seperatly *
+	// https://wright.nasa.gov/airplane/drageq.html <-- Drag Force Reference.
+	// DragForce = 1/2 * (Density of Fluid) * (Speed relative to the Fluid) * (Cross Sectional Areas) * (drag coefficient)
+	// This is simplified version avoiding the use of cross Section and Coefficient
+	vector3 DragForce = 0.50f * Drag * (VarletVelocity * VarletVelocity) * 0.47f; // <-- Drag Coefficient of a Sphere.
+	/* Calculate Acceleration based on newtons second law*/
+	vector3 DragAcceleration = DragForce / mass; // a = f/m
+	NewAcceleration = GravAcceleration - DragAcceleration;
 }
 
-void Particle::CalculateVelocity(float deltaTime)
-{
-	/*
-		Vt + dt = Vt +(at) + dt;  // dt = deltaTime, Vt = Velocity at time, (Vt +dt) -> Future Velocity, at = acceleration at the time.
-		deltaTime -> Time taken From previous frame to next.
-	*/
-	LinearVelocity += (LinearAcceleration)*deltaTime;
-	//std::cout << velocity.y << std::endl; // Debug
-}
 
-void Particle::SetDisplacements(float deltaTime)
-{
-	FuturePosition = position + (LinearVelocity)*deltaTime;
-	position = FuturePosition;
 
-	// Dampening " Makes sure that the object stops moving forever. To test Use Keyboard Only.
-	LinearVelocity *= pow(0.1, deltaTime);
-}
 
 void Particle::CheckForKeyboard(float deltaTime)
 {
 	/* Consider !! Having Force = 1.f Instead of applying + each time !!*/
-	if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
-		keyboardForce.y += 1.f * deltaTime;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_UP] == true)
+		//keyboardForce.y += 1.f * deltaTime;
 		//keyboardForce.y = 5f; //<-- Use this for more strict control of particle, with gravity.
-	else keyboardForce.y = 0;
-	if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
-		keyboardForce.y -= 1.f * deltaTime;
-	if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true)
-		keyboardForce.x -= 1.f * deltaTime;
-	else if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true)
-		keyboardForce.x += 1.f * deltaTime;
-	else keyboardForce.x = 0;
+	//else keyboardForce.y = 0;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_DOWN] == true)
+		//keyboardForce.y -= 1.f * deltaTime;
+	//if (GameObject::NonACII_keyMap[GLUT_KEY_RIGHT] == true)
+		//keyboardForce.x -= 1.f * deltaTime;
+	//else if (GameObject::NonACII_keyMap[GLUT_KEY_LEFT] == true)
+		//keyboardForce.x += 1.f * deltaTime;
+	//else keyboardForce.x = 0;
+}
+
+float Particle::SqrNumber(float Number)
+{
+	return Number * Number;
 }
