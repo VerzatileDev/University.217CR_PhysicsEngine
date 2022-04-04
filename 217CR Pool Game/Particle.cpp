@@ -26,18 +26,25 @@ void Particle::Draw()
 	
 	
 	// Displays A Point on the Object making it easier to see rotation. " See Point class for more Information !"
-	Point::size = 5.0f;
-	Point::pointColor = Colors3f::Red;
-	Point::pointLocation = vector3(radius, 0, 0);
-	Point::Draw();
-
+	if(ShowDetails)
+	{
+		Point::size = 5.0f;
+		Point::pointColor = Colors3f::Red;
+		Point::pointLocation = vector3(GameObject::radius, 0, 0);
+		Point::Draw();
+	}
+	
 	glPopMatrix();
 
-	// Position.x - r states here the text displayed from radius of the object
-	// Position.y + 0.3 states the Row for text displayed
-	//GameObject::renderBitmapString(position.x - radius, position.y, position.z, "  Position.x " + std::to_string(position.x));
-	//GameObject::renderBitmapString(position.x - radius, position.y - 0.3 , position.z, "  Position.y " + std::to_string(position.y));
-	//GameObject::renderBitmapString(position.x - radius, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
+	if (ShowDetails)
+	{
+		// Position.x - r states here the text displayed from radius of the object
+		// Position.y + 0.3 states the Row for text displayed
+		GameObject::renderBitmapString(position.x - GameObject::radius, position.y, position.z, "  Position.x " + std::to_string(position.x));
+		GameObject::renderBitmapString(position.x - GameObject::radius, position.y - 0.3, position.z, "  Position.y " + std::to_string(position.y));
+		GameObject::renderBitmapString(position.x - GameObject::radius, position.y - 0.6, position.z, "  Position.z " + std::to_string(position.z));
+	}
+	
 	
 }
 
@@ -80,7 +87,6 @@ Particle::Particle(float mas, vector3 pos, vector3 col, float rad, bool Keyboard
 {
 	UserInput = KeyboardUse;
 	ShowDetails = ShowingDetailsOnObject; // True false "Show dot on Object, see rotation direction / Details of Object : Position, Velocity etc.
-	//radius = rad;
 }
 
 

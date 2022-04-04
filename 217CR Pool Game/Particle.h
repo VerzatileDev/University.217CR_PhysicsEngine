@@ -27,9 +27,6 @@ private:
 protected:
 	bool UserInput = false;
 	bool ShowDetails = false;
-	//float radius = 0.3f;                          // Radius of the Particle " Hard Code "
-
-
 public:
 	void Draw();
 	void Update(float);
