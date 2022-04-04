@@ -164,7 +164,7 @@ void GameEngine::UpdateGame(void)
 	// Send them to SphereCollider::CollisionCheck
 
 
-	
+	/* !! USE THIS FOR CHECKING an OBJECTS AGAINST ALL OTHER OBJECTS IN SCENE !!*/
 
 	for (int i = 1; i < objects.size(); ++i) // Change this to Collision Objects Instead..
 	{
@@ -192,6 +192,33 @@ void GameEngine::UpdateGame(void)
 
 	}
 
+	/* !! USE THIS FOR CHECKING ALL OBJECTS IN SCENE !!*/
+	
+	//for (unsigned int i = 0; i < objects.size(); i++)
+	//{
+	//	for (unsigned int j = i + 1; j < objects.size(); j++)
+	//	{
+		/* Objects can Only access shared data from between object and gameobject class */
+		/* SPHERE ON SPHERE COLLISION CHECK  " CURRENTLY INCLUDES ALL OTHER OBJECT THAT HAVE NO COLLISION !*/
+	//	glm::vec3 tempposition1 = objects[i]->position; // PLAYER object This Means The Check Only happens Between first Object and the Rest
+	//	glm::vec3 tempposition2 = objects[j]->position;
+	//	float tempRadius1 = objects[0]->radius;
+	//	float tempRadius2 = objects[i]->radius;
+
+
+
+	//	std::cout << "Radius of object " << i << " Its Radius is : " << objects[i]->radius << std::endl; // Debug
+
+	//	bool value = SphereCollider::CollisionCheck(tempposition1, tempposition2, tempRadius1, tempRadius2);
+	//	if (value == true)
+	//	{
+	//		std::cout << "Collision with" << " object Number " << i << std::endl; // Debug
+	//
+	//		objects[i]->color = Colors3f::Magenta; // Collision Detected
+	//	}
+	//	else objects[i]->color = Colors3f::Green; // No collision detected
+	//	}
+	//}
 
 
 

@@ -12,7 +12,17 @@ bool SphereCollider::CollisionCheck(glm::vec3 position, glm::vec3 position2, flo
 
 
 
-	if (distance > radii * radii) collision = false;
+	if (distance > radii * radii)
+	{
+		// Here we would Would do a second check to see if
+		// Balls are moving towards each other
+		/* Formula  netVelocity = sphere1->v - sphere2->v
+		   displacement = spehre1->pos - sphere2->pos    ;
+		   netVelocity * displacement < 0                ;*/
+
+		// Which sees if they will still be colliding calling collision true or they are already Moving away from object.
+		collision = false;
+	}
 	if (distance <= radii * radii) collision = true;
 
 
